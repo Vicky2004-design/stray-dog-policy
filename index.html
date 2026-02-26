@@ -895,22 +895,19 @@
 <script>
   // ── Wix 跳轉函數 ──
   function navigateToWixPolicy() {
-    const targetUrl = 'https://wujei50191.wixsite.com/ccucom#%E6%94%BF%E7%AD%96';
-    window.location.href = targetUrl;
+    const baseUrl = 'https://wujei50191.wixsite.com/ccucom';
+    const targetHash = '#%E6%94%BF%E7%AD%96';
+    window.location.href = baseUrl + targetHash;
     setTimeout(function() {
       try {
         let element = document.querySelector('[data-anchor="政策"]') || document.querySelector('[id*="政策"]') || document.querySelector('[data-anchor="%E6%94%BF%E7%AD%96"]') || document.querySelector('[id*="%E6%94%BF%E7%AD%96"]');
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        } else {
-          if (window.location.hash !== '#%E6%94%BF%E7%AD%96') {
-            window.location.hash = '%E6%94%BF%E7%AD%96';
-          }
         }
       } catch(e) {
-        console.log('Navigation completed');
+        // Silent fail
       }
-    }, 1500);
+    }, 2500);
   }
 
   // ── Tab 切換 ──
