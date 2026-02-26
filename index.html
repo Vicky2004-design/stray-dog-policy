@@ -262,17 +262,73 @@
       text-align: center;
       margin-top: 10px;
     }
+    
+    .diagram-container {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 20px 0;
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      position: relative;
+      scroll-behavior: smooth;
+    }
+    
+    .diagram-container::-webkit-scrollbar {
+      height: 8px;
+    }
+    
+    .diagram-container::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.05);
+      border-radius: 4px;
+    }
+    
+    body.dark-mode .diagram-container::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.05);
+    }
+    
+    .diagram-container::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.2);
+      border-radius: 4px;
+    }
+    
+    .diagram-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(0,0,0,0.4);
+    }
+    
+    body.dark-mode .diagram-container::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2);
+    }
+    
+    body.dark-mode .diagram-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,255,255,0.4);
+    }
+    
     .diagram-wrap img {
-      max-width: 100%;
+      display: block;
       border-radius: 8px;
       cursor: zoom-in;
       transition: transform 0.3s ease;
+      min-width: 1200px;
+      height: auto;
+      margin: 0 auto;
+      padding: 0 20px;
     }
+    
+    .diagram-wrap img.zoomed {
+      cursor: zoom-out;
+      min-width: 1800px;
+    }
+    
     .diagram-hint {
       margin-top: 12px;
       font-size: 0.8rem;
       color: var(--muted);
       font-style: italic;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
     /* ── Accordion ── */
@@ -305,6 +361,13 @@
       main { padding: 24px 16px; }
       .tab-bar { gap: 6px; padding: 20px 12px 0; }
       .tab-btn { padding: 8px 18px; font-size: 0.85rem; }
+      .diagram-wrap img {
+        min-width: 100%;
+        padding: 0;
+      }
+      .diagram-wrap img.zoomed {
+        min-width: 150%;
+      }
     }
   </style>
 </head>
@@ -490,10 +553,10 @@
       <div class="card-title"><i class="fas fa-sitemap"></i> 完整政策流程圖</div>
       <div class="card-sub">零撲殺前後完整決策流程一覽（可點擊放大）</div>
       <div class="diagram-wrap">
-        <div style="overflow-x: auto; padding: 20px 0; background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);">
-          <img src="flowchart_horizontal.png" alt="完整政策流程圖" style="min-width: 1200px; height: auto; cursor: zoom-in;" onclick="this.style.minWidth=this.style.minWidth=='1200px'?'1800px':'1200px';this.style.cursor=this.style.cursor=='zoom-out'?'zoom-in':'zoom-out'" title="點擊放大" />
+        <div class="diagram-container">
+          <img src="flowchart_horizontal.png" alt="完整政策流程圖" onclick="toggleZoom(this)" title="點擊放大或縮小" />
         </div>
-        <div class="diagram-hint"><i class="fas fa-mouse"></i> 橫向捲動以查看完整流程 | 點擊圖片可放大檢視</div>
+        <div class="diagram-hint"><i class="fas fa-arrows-alt-h"></i> 橫向捲動以查看完整流程 | 點擊圖片可放大檢視</div>
       </div>
     </div>
 
@@ -547,6 +610,12 @@
     } else {
       alert('請複製網址分享：' + window.location.href);
     }
+  }
+
+  // ── 圖表縮放功能 ──
+  function toggleZoom(img) {
+    img.classList.toggle('zoomed');
+    img.style.cursor = img.classList.contains('zoomed') ? 'zoom-out' : 'zoom-in';
   }
 
   // ── 摺疊選單 ──
