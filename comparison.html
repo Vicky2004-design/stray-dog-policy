@@ -5,245 +5,279 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>各國遊蕩犬政策對比</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     /* ── Reset & Base ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #fafafa;
+      --bg: #ffffff;
       --card: #ffffff;
       --primary: #1a1a1a;
-      --secondary: #666666;
-      --muted: #999999;
-      --border: #e0e0e0;
-      --shadow: 0 2px 12px rgba(0,0,0,0.08);
-      --radius: 12px;
+      --secondary: #444444;
+      --muted: #888888;
+      --border: #dddddd;
+      --accent: #000000;
+      --shadow: 0 4px 20px rgba(0,0,0,0.05);
+      --radius: 0px; /* Professional sharp corners or minimal radius */
     }
     
     /* ── Dark Mode ── */
     body.dark-mode {
-      --bg: #0f0f0f;
-      --card: #1a1a1a;
-      --primary: #f5f5f5;
-      --secondary: #b0b0b0;
-      --muted: #808080;
+      --bg: #121212;
+      --card: #1e1e1e;
+      --primary: #eeeeee;
+      --secondary: #cccccc;
+      --muted: #888888;
       --border: #333333;
-      --shadow: 0 2px 12px rgba(0,0,0,0.3);
+      --accent: #ffffff;
+      --shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
     
     body {
-      font-family: 'Noto Sans TC', 'Segoe UI', sans-serif;
+      font-family: 'Noto Sans TC', sans-serif;
       background: var(--bg);
       color: var(--primary);
       min-height: 100vh;
-      font-weight: 400;
+      line-height: 1.6;
       transition: background 0.3s ease, color 0.3s ease;
     }
 
     /* ── Header ── */
     header {
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-      color: #fff;
-      padding: 56px 24px 48px;
+      border-bottom: 1px solid var(--border);
+      padding: 60px 24px 40px;
       text-align: center;
       position: relative;
     }
     
     header h1 {
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-size: 2.5rem;
       font-weight: 700;
-      line-height: 1.3;
-      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      text-transform: uppercase;
     }
     
     header p {
-      font-size: 0.95rem;
-      opacity: 0.85;
-      line-height: 1.6;
+      font-size: 1.1rem;
+      color: var(--secondary);
+      max-width: 700px;
+      margin: 0 auto;
     }
     
     .header-controls {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: 30px;
+      right: 30px;
       display: flex;
-      gap: 10px;
+      gap: 15px;
     }
     
-    .theme-toggle, .return-btn {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.25);
-      color: #fff;
-      border-radius: 8px;
-      padding: 8px 12px;
+    .btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--primary);
+      padding: 8px 16px;
       cursor: pointer;
       font-size: 0.9rem;
-      transition: all 0.24s ease;
+      font-weight: 500;
+      transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
     
-    .theme-toggle:hover, .return-btn:hover {
-      background: rgba(255,255,255,0.25);
-      transform: translateY(-2px);
+    .btn:hover {
+      background: var(--primary);
+      color: var(--bg);
+      border-color: var(--primary);
     }
 
     /* ── Main Content ── */
     main {
-      max-width: 1400px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 60px 20px;
     }
-    
+
+    /* ── Infographic Section ── */
+    .infographic-container {
+      margin-bottom: 80px;
+      text-align: center;
+    }
+
+    .infographic-container h2 {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      font-weight: 700;
+      text-align: left;
+      border-left: 4px solid var(--accent);
+      padding-left: 15px;
+    }
+
+    .infographic-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .infographic-box img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ── Interactive Grid Section ── */
+    .grid-title {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      font-weight: 700;
+      text-align: left;
+      border-left: 4px solid var(--accent);
+      padding-left: 15px;
+    }
+
     .comparison-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      margin-top: 24px;
+      gap: 30px;
     }
     
     .country-card {
       background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
       border: 1px solid var(--border);
-      overflow: hidden;
       transition: all 0.3s ease;
-      cursor: pointer;
+      display: flex;
+      flex-direction: column;
     }
     
     .country-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
     }
     
     .card-header {
-      background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-      color: #fff;
-      padding: 24px;
+      padding: 30px 24px;
+      border-bottom: 1px solid var(--border);
       text-align: center;
     }
     
     .country-flag {
-      font-size: 3rem;
-      margin-bottom: 12px;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
     }
     
     .country-name {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
     
     .country-subtitle {
-      font-size: 0.85rem;
-      opacity: 0.8;
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 500;
     }
     
     .card-content {
-      padding: 24px;
+      padding: 30px 24px;
+      flex-grow: 1;
     }
     
     .section-title {
       font-weight: 700;
-      font-size: 0.95rem;
-      color: var(--primary);
-      margin-bottom: 12px;
+      font-size: 1rem;
+      margin-bottom: 15px;
       display: flex;
       align-items: center;
-      gap: 8px;
-    }
-    
-    .section-title i {
-      color: #1565c0;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     
     .section-list {
-      font-size: 0.9rem;
-      line-height: 1.8;
-      color: var(--secondary);
-      margin-bottom: 20px;
+      list-style: none;
+      font-size: 0.95rem;
+      margin-bottom: 25px;
     }
     
     .section-list li {
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       display: flex;
       align-items: flex-start;
-      gap: 8px;
+      gap: 10px;
+      color: var(--secondary);
     }
     
     .section-list i {
-      margin-top: 2px;
-      flex-shrink: 0;
+      margin-top: 5px;
+      font-size: 0.8rem;
     }
-    
-    .section-list .success {
-      color: #388e3c;
-    }
-    
-    .section-list .warning {
-      color: #d32f2f;
+
+    .expand-section {
+      margin-top: auto;
+      border-top: 1px solid var(--border);
+      padding: 20px 24px;
     }
     
     .expand-btn {
-      background: #1565c0;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      padding: 8px 12px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: all 0.24s ease;
+      background: none;
+      border: 1px solid var(--primary);
+      color: var(--primary);
       width: 100%;
+      padding: 10px;
+      cursor: pointer;
       font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
     }
     
     .expand-btn:hover {
-      background: #1e53e5;
-      transform: translateY(-2px);
+      background: var(--primary);
+      color: var(--bg);
     }
     
     .hidden-content {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.3s ease;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     .hidden-content.show {
-      max-height: 500px;
+      max-height: 300px;
+      margin-top: 15px;
     }
     
     .hidden-text {
-      font-size: 0.85rem;
-      line-height: 1.8;
+      font-size: 0.9rem;
       color: var(--secondary);
-      padding-top: 12px;
+      line-height: 1.7;
+      padding: 15px;
+      background: rgba(0,0,0,0.03);
+      border-left: 2px solid var(--accent);
+    }
+
+    body.dark-mode .hidden-text {
+      background: rgba(255,255,255,0.03);
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 60px 24px;
       border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.9rem;
     }
 
     /* ── Responsive ── */
     @media (max-width: 768px) {
-      header {
-        padding: 40px 16px 32px;
-      }
-      
-      main {
-        padding: 24px 16px;
-      }
-      
-      .comparison-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .header-controls {
-        position: static;
-        justify-content: center;
-        margin-top: 16px;
-      }
-      
-      .country-flag {
-        font-size: 2rem;
-      }
+      header { padding: 80px 20px 40px; }
+      header h1 { font-size: 2rem; }
+      .header-controls { top: 20px; right: 20px; left: 20px; justify-content: space-between; }
+      main { padding: 40px 20px; }
+      .infographic-container h2, .grid-title { font-size: 1.5rem; }
     }
   </style>
 </head>
@@ -251,148 +285,176 @@
 
 <header>
   <div class="header-controls">
-    <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i> 深色</button>
-    <button class="return-btn" onclick="history.back()"><i class="fas fa-arrow-left"></i> 返回</button>
+    <button class="btn" onclick="history.back()"><i class="fas fa-arrow-left"></i> 返回</button>
+    <button class="btn" onclick="toggleTheme()" id="theme-btn"><i class="fas fa-moon"></i> 深色模式</button>
   </div>
-  <h1>各國遊蕩犬政策對比</h1>
-  <p>全球不同國家的遊蕩犬管理策略與成功經驗<br>點擊卡片展開詳細內容</p>
+  <h1>國際遊蕩犬政策研究</h1>
+  <p>彙整全球標竿國家的管理策略，透過數據與法規分析，為台灣政策演進提供客觀的參考基準。</p>
 </header>
 
 <main>
-  <div class="comparison-grid">
-    <!-- Singapore -->
-    <div class="country-card">
-      <div class="card-header">
-        <div class="country-flag">🇸🇬</div>
-        <div class="country-name">新加坡</div>
-        <div class="country-subtitle">TNRM 制度化管理</div>
-      </div>
-      <div class="card-content">
-        <div class="section-title"><i class="fas fa-lightbulb"></i> 核心策略</div>
-        <div class="section-list">
-          <li><span>TNRM 制度化管理遊蕩犬</span></li>
-        </div>
-        
-        <div class="section-title"><i class="fas fa-check-circle"></i> 成功因素</div>
-        <div class="section-list">
-          <li><i class="fas fa-check success"></i> 政府與跨部門合作</li>
-          <li><i class="fas fa-check success"></i> 八成遊蕩犬完成絕育</li>
-          <li><i class="fas fa-check success"></i> 公眾教育 志工長期管理</li>
-        </div>
-        
-        <button class="expand-btn" onclick="toggleExpand(this)">查看借鏡重點</button>
-        <div class="hidden-content">
-          <div class="hidden-text">
-            <strong>借鏡重點：</strong> TNRM 必須「有管理」結合登記，與社區參與避免「只放不管」導致問題回流
-          </div>
-        </div>
-      </div>
+  <!-- Infographic Section -->
+  <section class="infographic-container">
+    <h2>政策對比分析圖表</h2>
+    <div class="infographic-box">
+      <img src="pro_comparison_academic.png" alt="各國遊蕩犬管理政策對比分析專業圖表">
     </div>
+  </section>
 
-    <!-- Germany -->
-    <div class="country-card">
-      <div class="card-header">
-        <div class="country-flag">🇩🇪</div>
-        <div class="country-name">德國</div>
-        <div class="country-subtitle">源頭零漏洞高度管控</div>
-      </div>
-      <div class="card-content">
-        <div class="section-title"><i class="fas fa-lightbulb"></i> 核心策略</div>
-        <div class="section-list">
-          <li><span>源頭零漏洞的責任制度</span></li>
+  <!-- Interactive Grid Section -->
+  <section>
+    <h2 class="grid-title">詳細政策解構</h2>
+    <div class="comparison-grid">
+      <!-- Singapore -->
+      <div class="country-card">
+        <div class="card-header">
+          <div class="country-flag">🇸🇬</div>
+          <div class="country-name">新加坡</div>
+          <div class="country-subtitle">TNRM 制度化管理</div>
         </div>
-        
-        <div class="section-title"><i class="fas fa-check-circle"></i> 成功因素</div>
-        <div class="section-list">
-          <li><i class="fas fa-check success"></i> 強制晶片 + 登記制</li>
-          <li><i class="fas fa-check success"></i> 嚴格法律與高罰金</li>
-          <li><i class="fas fa-check success"></i> 將犬隻視為家庭成員</li>
+        <div class="card-content">
+          <div class="section-title"><i class="fas fa-microchip"></i> 核心策略</div>
+          <ul class="section-list">
+            <li>TNRM 制度化管理遊蕩犬，將絕育與後續監測納入官方流程。</li>
+          </ul>
+          
+          <div class="section-title"><i class="fas fa-check"></i> 成功因素</div>
+          <ul class="section-list">
+            <li><i class="fas fa-circle"></i> 政府與民間組織深度跨部門合作。</li>
+            <li><i class="fas fa-circle"></i> 達成八成以上遊蕩犬絕育率之門檻。</li>
+            <li><i class="fas fa-circle"></i> 強調公眾教育與社區志工的長期管理。</li>
+          </ul>
         </div>
-        
-        <button class="expand-btn" onclick="toggleExpand(this)">查看借鏡重點</button>
-        <div class="hidden-content">
-          <div class="hidden-text">
-            <strong>借鏡重點：</strong> 源頭零漏洞的責任制度透過強制晶片、登記與高額罰則從源頭阻斷浪犬產生
+        <div class="expand-section">
+          <button class="expand-btn" onclick="toggleExpand(this)">分析借鏡重點</button>
+          <div class="hidden-content">
+            <div class="hidden-text">
+              <strong>政策啟示：</strong> TNR 必須結合「有效管理」與「身分登記」，避免因缺乏社區參與而導致管理真空，造成問題回流。
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Netherlands -->
-    <div class="country-card">
-      <div class="card-header">
-        <div class="country-flag">🇳🇱</div>
-        <div class="country-name">荷蘭</div>
-        <div class="country-subtitle">2019 實施零流浪犬</div>
-      </div>
-      <div class="card-content">
-        <div class="section-title"><i class="fas fa-lightbulb"></i> 核心策略</div>
-        <div class="section-list">
-          <li><span>多管齊下治理結合法律、經濟、教育與文化</span></li>
+      <!-- Germany -->
+      <div class="country-card">
+        <div class="card-header">
+          <div class="country-flag">🇩🇪</div>
+          <div class="country-name">德國</div>
+          <div class="country-subtitle">源頭零漏洞管控</div>
         </div>
-        
-        <div class="section-title"><i class="fas fa-check-circle"></i> 成功因素</div>
-        <div class="section-list">
-          <li><i class="fas fa-check success"></i> 強制登記 + 養狗稅</li>
-          <li><i class="fas fa-check success"></i> 高額罰款與監禁</li>
-          <li><i class="fas fa-check success"></i> 經濟與社福基礎高</li>
+        <div class="card-content">
+          <div class="section-title"><i class="fas fa-gavel"></i> 核心策略</div>
+          <ul class="section-list">
+            <li>源頭零漏洞的責任制度，建立極高門檻的飼主准入機制。</li>
+          </ul>
+          
+          <div class="section-title"><i class="fas fa-check"></i> 成功因素</div>
+          <ul class="section-list">
+            <li><i class="fas fa-circle"></i> 強制性晶片植入與全國統一登記制。</li>
+            <li><i class="fas fa-circle"></i> 嚴格的動物保護法規與高額違規罰金。</li>
+            <li><i class="fas fa-circle"></i> 社會文化將犬隻視為具法律地位的家庭成員。</li>
+          </ul>
         </div>
-        
-        <button class="expand-btn" onclick="toggleExpand(this)">查看借鏡重點</button>
-        <div class="hidden-content">
-          <div class="hidden-text">
-            <strong>借鏡重點：</strong> 多管齊下治理結合法律、經濟、教育與文化全面強化飼主責任
+        <div class="expand-section">
+          <button class="expand-btn" onclick="toggleExpand(this)">分析借鏡重點</button>
+          <div class="hidden-content">
+            <div class="hidden-text">
+              <strong>政策啟示：</strong> 透過強制登記與高額罰則，從源頭阻斷棄養行為，是解決浪犬問題最根本且成本最低的途徑。
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Taiwan -->
-    <div class="country-card">
-      <div class="card-header">
-        <div class="country-flag">🇹🇼</div>
-        <div class="country-name">臺灣</div>
-        <div class="country-subtitle">零撲殺配套不足</div>
+      <!-- Netherlands -->
+      <div class="country-card">
+        <div class="card-header">
+          <div class="country-flag">🇳🇱</div>
+          <div class="country-name">荷蘭</div>
+          <div class="country-subtitle">2019 達成零流浪犬</div>
+        </div>
+        <div class="card-content">
+          <div class="section-title"><i class="fas fa-layer-group"></i> 核心策略</div>
+          <ul class="section-list">
+            <li>多管齊下治理，結合法律約束、經濟槓桿、教育推廣與文化形塑。</li>
+          </ul>
+          
+          <div class="section-title"><i class="fas fa-check"></i> 成功因素</div>
+          <ul class="section-list">
+            <li><i class="fas fa-circle"></i> 實施強制登記與差異化養狗稅（鼓勵收容代替購買）。</li>
+            <li><i class="fas fa-circle"></i> 對虐待或棄養行為處以高額罰款甚至監禁。</li>
+            <li><i class="fas fa-circle"></i> 國家具備高度經濟與社會福利基礎支撐。</li>
+          </ul>
+        </div>
+        <div class="expand-section">
+          <button class="expand-btn" onclick="toggleExpand(this)">分析借鏡重點</button>
+          <div class="hidden-content">
+            <div class="hidden-text">
+              <strong>政策啟示：</strong> 零流浪犬並非單一政策結果，而是法律、經濟與教育全面強化「飼主責任」後的必然產物。
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="card-content">
-        <div class="section-title"><i class="fas fa-lightbulb"></i> 核心策略</div>
-        <div class="section-list">
-          <li><span>必須多管齊下絕育、教育、登記、重罰缺一不可</span></li>
+
+      <!-- Taiwan -->
+      <div class="country-card">
+        <div class="card-header">
+          <div class="country-flag">🇹🇼</div>
+          <div class="country-name">臺灣</div>
+          <div class="country-subtitle">零撲殺政策挑戰</div>
         </div>
-        
-        <div class="section-title"><i class="fas fa-times-circle"></i> 當前挑戰</div>
-        <div class="section-list">
-          <li><i class="fas fa-times warning"></i> 不當飼養問題嚴重</li>
-          <li><i class="fas fa-times warning"></i> 棄養未根除</li>
-          <li><i class="fas fa-times warning"></i> 遊蕩犬數量仍高</li>
+        <div class="card-content">
+          <div class="section-title"><i class="fas fa-exclamation-triangle"></i> 核心策略</div>
+          <ul class="section-list">
+            <li>目前處於「零撲殺」轉型期，配套措施（如絕育速度、源頭管控）仍待加強。</li>
+          </ul>
+          
+          <div class="section-title"><i class="fas fa-sync"></i> 當前挑戰</div>
+          <ul class="section-list">
+            <li><i class="fas fa-circle"></i> 非科學化的不當餵食行為導致族群擴張。</li>
+            <li><i class="fas fa-circle"></i> 棄養行為未受有效根除，收容體系飽和。</li>
+            <li><i class="fas fa-circle"></i> 遊蕩犬總數仍維持高位，人犬衝突頻發。</li>
+          </ul>
         </div>
-        
-        <button class="expand-btn" onclick="toggleExpand(this)">查看借鏡重點</button>
-        <div class="hidden-content">
-          <div class="hidden-text">
-            <strong>借鏡重點：</strong> 必須多管齊下絕育、教育、登記、重罰缺一不可，否則零撲殺將淪為「零管理」
+        <div class="expand-section">
+          <button class="expand-btn" onclick="toggleExpand(this)">分析借鏡重點</button>
+          <div class="hidden-content">
+            <div class="hidden-text">
+              <strong>政策啟示：</strong> 必須將「絕育、教育、登記、重罰」四者並行，缺一不可，否則「零撲殺」將淪為缺乏實質成效的「零管理」。
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </main>
+
+<footer>
+  <p>&copy; 2026 國際遊蕩犬政策研究專案. All rights reserved.</p>
+</footer>
 
 <script>
   function toggleTheme() {
-    document.body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+    const isDark = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    updateThemeBtn(isDark);
+  }
+  
+  function updateThemeBtn(isDark) {
+    const btn = document.getElementById('theme-btn');
+    btn.innerHTML = isDark ? '<i class="fas fa-sun"></i> 淺色模式' : '<i class="fas fa-moon"></i> 深色模式';
   }
   
   function toggleExpand(btn) {
     const content = btn.nextElementSibling;
-    content.classList.toggle('show');
-    btn.textContent = content.classList.contains('show') ? '隱藏詳情' : '查看借鏡重點';
+    const isShowing = content.classList.toggle('show');
+    btn.textContent = isShowing ? '隱藏分析內容' : '分析借鏡重點';
   }
   
   // Load saved theme preference
-  if (localStorage.getItem('theme') === 'dark') {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
     document.body.classList.add('dark-mode');
+    updateThemeBtn(true);
   }
 </script>
 

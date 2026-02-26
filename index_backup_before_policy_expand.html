@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>台灣遊蕩犬管理政策流程圖</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #fafafa;
+      --card: #ffffff;
+      --primary: #1a1a1a;
+      --secondary: #666666;
+      --muted: #999999;
+      --border: #e0e0e0;
+      --shadow: 0 2px 12px rgba(0,0,0,0.08);
+      --radius: 12px;
+      --accent-red: #d32f2f;
+      --accent-green: #388e3c;
+      --accent-purple: #6a1b9a;
+      --accent-blue: #1565c0;
+    }
+    
+    /* ── Dark Mode ── */
+    body.dark-mode {
+      --bg: #0f0f0f;
+      --card: #1a1a1a;
+      --primary: #f5f5f5;
+      --secondary: #b0b0b0;
+      --muted: #808080;
+      --border: #333333;
+      --shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    
+    body {
+      font-family: 'Noto Sans TC', 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--primary);
+      min-height: 100vh;
+      font-weight: 400;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      color: #fff;
+      padding: 56px 24px 48px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .header-controls {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 12px;
+    }
+    
+    .theme-toggle, .share-btn {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.24s ease;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+    
+    .theme-toggle:hover, .share-btn:hover {
+      background: rgba(255,255,255,0.25);
+      transform: translateY(-2px);
+    }
+    
+    header .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
+      padding: 6px 18px;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+    header h1 {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    header p {
+      font-size: 1rem;
+      opacity: 0.85;
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    /* ── Nav Tabs ── */
+    .tab-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 32px 16px 0;
+      flex-wrap: wrap;
+      background: var(--bg);
+      align-items: center;
+      overflow-x: auto;
+    }
+    
+    .tab-bar .return-btn {
+      margin-left: auto;
+    }
+    
+    @media (max-width: 768px) {
+      .tab-bar .return-btn {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 100%;
+      }
+    }
+    .tab-btn {
+      padding: 11px 26px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: var(--card);
+      color: var(--secondary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.24s ease;
+      font-family: 'Noto Sans TC', sans-serif;
+      white-space: nowrap;
+    }
+    .tab-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--bg);
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    /* ── Main Content ── */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    
+    .tab-panel {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      transition: all 0.24s ease;
+    }
+    .card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      transform: translateY(-2px);
+    }
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+    .card-sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    /* ── Diagram ── */
+    .diagram-wrap {
+      position: relative;
+      text-align: center;
+      margin: 20px 0;
+    }
+    .diagram-wrap img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      cursor: zoom-in;
+      transition: all 0.24s ease;
+    }
+    .diagram-hint {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      margin-top: 60px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      header { padding: 40px 16px 32px; }
+      main { padding: 24px 16px; }
+      .card { padding: 20px; }
+      .header-controls { top: 12px; right: 12px; gap: 8px; }
+      .tab-bar { padding: 20px 8px 0; }
+      .tab-btn { padding: 9px 16px; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-controls">
+    <button class="theme-toggle" onclick="toggleDarkMode()" title="切換深色模式">
+      <i class="fas fa-moon"></i> 深色
+    </button>
+    <button class="share-btn" onclick="showShareMenu()" title="分享此頁面">
+      <i class="fas fa-share-alt"></i> 分享
+    </button>
+  </div>
+  <div class="badge">台灣動物保護政策</div>
+  <h1>遊蕩犬管理政策流程圖</h1>
+  <p>零撲殺前後的處理流程對比，以及 TNVR 人道管理機制說明</p>
+</header>
+
+<!-- Tab Navigation -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('overview')"><i class="fas fa-chart-bar"></i> 政策概覽</button>
+  <button class="tab-btn" onclick="switchTab('before')"><i class="fas fa-times-circle"></i> 零撲殺前</button>
+  <button class="tab-btn" onclick="switchTab('after')"><i class="fas fa-check-circle"></i> 零撲殺後</button>
+  <button class="tab-btn" onclick="switchTab('tnvr')"><i class="fas fa-heart"></i> TNVR 詳解</button>
+  <button class="tab-btn" onclick="switchTab('diagram')"><i class="fas fa-sitemap"></i> 完整流程圖</button>
+  <button class="tab-btn return-btn" style="background: linear-gradient(135deg, #1a1a1a 0%, #333 100%); color: #fff; border-color: #1a1a1a; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; transition: all 0.24s ease; cursor: pointer;" onmouseover="this.style.background='linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='linear-gradient(135deg, #1a1a1a 0%, #333 100%)'; this.style.transform='translateY(0)';" onclick="history.back();" title="返回上一頁"><i class="fas fa-arrow-left"></i> 返回</button>
+</div>
+
+<main>
+
+  <!-- TAB 1: 政策概覽 -->
+  <div id="tab-overview" class="tab-panel active">
+    <div class="card">
+      <div class="card-title"><i class="fas fa-chart-bar"></i> 政策概覽</div>
+      <div class="card-sub">台灣遊蕩犬管理政策的核心要點</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:20px;">
+        <div style="background:var(--bg);padding:16px;border-radius:8px;border-left:4px solid var(--accent-red);">
+          <div style="font-weight:700;color:var(--accent-red);margin-bottom:8px;">1998-2017</div>
+          <div style="font-size:0.85rem;color:var(--secondary);">無差別捕捉與撲殺政策</div>
+        </div>
+        <div style="background:var(--bg);padding:16px;border-radius:8px;border-left:4px solid var(--accent-green);">
+          <div style="font-weight:700;color:var(--accent-green);margin-bottom:8px;">2017年後</div>
+          <div style="font-size:0.85rem;color:var(--secondary);">零撲殺政策與 TNVR 推行</div>
+        </div>
+        <div style="background:var(--bg);padding:16px;border-radius:8px;border-left:4px solid var(--accent-blue);">
+          <div style="font-weight:700;color:var(--accent-blue);margin-bottom:8px;">目標</div>
+          <div style="font-size:0.85rem;color:var(--secondary);">控制繁殖，提升免疫覆蓋</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: 零撲殺前 -->
+  <div id="tab-before" class="tab-panel">
+    <div class="card">
+      <div class="card-title"><i class="fas fa-times-circle"></i> 零撲殺前的政策流程</div>
+      <div class="card-sub">1998-2017 年間的做法</div>
+      <div style="margin-top:20px;">
+        <div style="background:var(--bg);border-radius:8px;padding:16px;margin-bottom:12px;border-left:4px solid var(--accent-red);">
+          <div style="font-weight:700;color:var(--accent-red);margin-bottom:8px;">通報/巡查發現遊蕩犬</div>
+          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">民眾或動物保護人員發現遊蕩犬時進行通報或巡查。</div>
+        </div>
+        <div style="background:var(--bg);border-radius:8px;padding:16px;margin-bottom:12px;border-left:4px solid var(--accent-red);">
+          <div style="font-weight:700;color:var(--accent-red);margin-bottom:8px;">無差別捕捉</div>
+          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">不論犬隻行為特徵，一律進行捕捉。</div>
+        </div>
+        <div style="background:var(--bg);border-radius:8px;padding:16px;margin-bottom:12px;border-left:4px solid var(--accent-red);">
+          <div style="font-weight:700;color:var(--accent-red);margin-bottom:8px;">送往收容所</div>
+          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">被捕捉的犬隻送入公立或民間收容所。</div>
+        </div>
+        <div style="background:var(--bg);border-radius:8px;padding:16px;margin-bottom:12px;border-left:4px solid var(--accent-red);">
+          <div style="font-weight:700;color:var(--accent-red);margin-bottom:8px;">期限內領回/送養</div>
+          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">通常為 12 天內，飼主可領回或由他人領養。</div>
+        </div>
+        <div style="background:var(--bg);border-radius:8px;padding:16px;border-left:4px solid var(--accent-red);">
+          <div style="font-weight:700;color:var(--accent-red);margin-bottom:8px;">撲殺</div>
+          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">期限內未被領回或送養的犬隻將被安樂死。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: 零撲殺後 -->
+  <div id="tab-after" class="tab-panel">
+    <div class="card">
+      <div class="card-title"><i class="fas fa-check-circle"></i> 零撲殺後的政策流程</div>
+      <div class="card-sub">2017 年後的新制度</div>
+      <div style="margin-top:20px;">
+        <div style="background:var(--bg);border-radius:8px;padding:16px;margin-bottom:12px;border-left:4px solid var(--accent-green);">
+          <div style="font-weight:700;color:var(--accent-green);margin-bottom:8px;">行為風險評估</div>
+          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">根據犬隻的行為特徵進行風險分類，判斷是否為高風險個體。</div>
+        </div>
+        <div style="background:var(--bg);border-radius:8px;padding:16px;margin-bottom:12px;border-left:4px solid var(--accent-green);">
+          <div style="font-weight:700;color:var(--accent-green);margin-bottom:8px;">高風險個體</div>
+          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">包括咬人、追車、對農牧場造成危害或在生態敏感區活動的犬隻。進行精準捕捉，帶離環境，不回置。</div>
+        </div>
+        <div style="background:var(--bg);border-radius:8px;padding:16px;border-left:4px solid var(--accent-green);">
+          <div style="font-weight:700;color:var(--accent-green);margin-bottom:8px;">低風險個體 - TNVR</div>
+          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">進行誘捕、結紮、疫苗接種，然後回置至原捕捉地點附近，以控制繁殖並提升免疫覆蓋率。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: TNVR 詳解 -->
+  <div id="tab-tnvr" class="tab-panel">
+    <div class="card">
+      <div class="card-title"><i class="fas fa-heart"></i> TNVR 四步驟</div>
+      <div class="card-sub">Trap-Neuter-Vaccinate-Return 人u道管理機制 （點擊下方卡片以查看詳細說明）</div>
+      <div style="margin-top:20px;display:flex;flex-direction:column;gap:12px;">
+        <div class="tnvr-expand-card" onclick="toggleTnvrExpand(this)" style="background:var(--bg);border-radius:8px;padding:16px;border-left:4px solid var(--accent-blue);cursor:pointer;transition:all 0.24s ease;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700;color:var(--accent-blue);margin-bottom:4px;"><i class="fas fa-cube"></i> T - 誘捕</div>
+              <div style="font-size:0.85rem;color:var(--secondary);">Trap: 使用誘捕籡或其他人u道方式</div>
+            </div>
+            <i class="fas fa-chevron-down" style="color:var(--accent-blue);transition:transform 0.24s ease;"></i>
+          </div>
+          <div class="tnvr-detail" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:0.9rem;color:var(--secondary);line-height:1.8;">
+            誘捕是 TNVR 的第一步。使用誘捕籡、羅網或其他人u道方式，將遊蕩犬安全地捕捕，不造成傷害。誘捕需要技巧和耐心，確保犬隻安全。
+          </div>
+        </div>
+        
+        <div class="tnvr-expand-card" onclick="toggleTnvrExpand(this)" style="background:var(--bg);border-radius:8px;padding:16px;border-left:4px solid var(--accent-blue);cursor:pointer;transition:all 0.24s ease;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700;color:var(--accent-blue);margin-bottom:4px;"><i class="fas fa-scissors"></i> N - 結紮</div>
+              <div style="font-size:0.85rem;color:var(--secondary);">Neuter: 進行結紮手術</div>
+            </div>
+            <i class="fas fa-chevron-down" style="color:var(--accent-blue);transition:transform 0.24s ease;"></i>
+          </div>
+          <div class="tnvr-detail" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:0.9rem;color:var(--secondary);line-height:1.8;">
+            結紮是 TNVR 的核心。通過外科手術進行結紮，防止自然繁殖，是長期控制遊蕩犬族群數量的最有效方法。結紮率需誁達到 70-85% 才能有效控制族群。
+          </div>
+        </div>
+        
+        <div class="tnvr-expand-card" onclick="toggleTnvrExpand(this)" style="background:var(--bg);border-radius:8px;padding:16px;border-left:4px solid var(--accent-blue);cursor:pointer;transition:all 0.24s ease;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700;color:var(--accent-blue);margin-bottom:4px;"><i class="fas fa-syringe"></i> V - 疆苗</div>
+              <div style="font-size:0.85rem;color:var(--secondary);">Vaccinate: 施打疆苗</div>
+            </div>
+            <i class="fas fa-chevron-down" style="color:var(--accent-blue);transition:transform 0.24s ease;"></i>
+          </div>
+          <div class="tnvr-detail" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:0.9rem;color:var(--secondary);line-height:1.8;">
+            疆苗是下一個關鍵步驟。特別是狀犬病疆苗，是公共衛生的重要一環。透過施打疆苗，提升遊蕩犬族群的免疫覆蓋率，保護人類和其他動物。
+          </div>
+        </div>
+        
+        <div class="tnvr-expand-card" onclick="toggleTnvrExpand(this)" style="background:var(--bg);border-radius:8px;padding:16px;border-left:4px solid var(--accent-blue);cursor:pointer;transition:all 0.24s ease;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700;color:var(--accent-blue);margin-bottom:4px;"><i class="fas fa-map-marker-alt"></i> R - 回置</div>
+              <div style="font-size:0.85rem;color:var(--secondary);">Return: 回置至原地</div>
+            </div>
+            <i class="fas fa-chevron-down" style="color:var(--accent-blue);transition:transform 0.24s ease;"></i>
+          </div>
+          <div class="tnvr-detail" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:0.9rem;color:var(--secondary);line-height:1.8;">
+            回置是 TNVR 的最後一步。將結紮、接種後的犬隻回置至原捕捕地點附近。這樣可以維持族群的穩定性，同時也是最人道的做法。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 5: 完整流程圖 -->
+  <div id="tab-diagram" class="tab-panel">
+    <div class="card">
+      <div class="card-title"><i class="fas fa-sitemap"></i> 完整政策流程圖</div>
+      <div class="card-sub">零撲殺前後完整決策流程一覽（可點擊放大）</div>
+      <div class="diagram-wrap">
+        <img src="flowchart_v3.png" alt="完整政策流程圖" onclick="this.style.transform=this.style.transform?'':'scale(1.5)';this.style.cursor=this.style.cursor=='zoom-out'?'zoom-in':'zoom-out'" title="點擊放大" />
+        <div class="diagram-hint"><i class="fas fa-mouse"></i> 點擊圖片可放大檢視</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><i class="fas fa-image"></i> 靜態流程圖（可下載）</div>
+      <div class="card-sub">高解析度流程圖，適合列印或簡報使用</div>
+      <img src="flowchart_v3.png" alt="遊蕩犬管理政策流程圖" style="width:100%;max-width:700px;display:block;margin:20px auto;border-radius:10px;border:1px solid var(--border);" />
+      <div style="text-align:center;margin-top:20px;">
+        <button onclick="downloadFlowchart()" style="background:linear-gradient(135deg, #1a1a1a 0%, #333 100%);color:#fff;border:none;padding:12px 28px;border-radius:999px;cursor:pointer;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.24s ease;" onmouseover="this.style.background='linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)';this.style.transform='translateY(-2px)';" onmouseout="this.style.background='linear-gradient(135deg, #1a1a1a 0%, #333 100%)';this.style.transform='translateY(0)';">
+          <i class="fas fa-download"></i> 下載 PNG
+        </button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  台灣遊蕩犬管理政策流程圖 ｜ 資料來源：農業部動物保護資訊網、動物保護法（2015年修正）
+</footer>
+
+<script>
+  // ── 深色模式切換 ──
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+  }
+  
+  // 初始化深色模式
+  if (localStorage.getItem('darkMode') === 'true') {
+    document.body.classList.add('dark-mode');
+  }
+
+  // ── 分享功能 ──
+  function showShareMenu() {
+    const url = window.location.href;
+    const title = '台灣遊蕩犬管理政策流程圖';
+    
+    if (navigator.share) {
+      navigator.share({ title, url });
+    } else {
+      alert('分享功能：\n\nFacebook: ' + url + '\nLINE: ' + url);
+    }
+  }
+
+  // ── Tab 切換 ──
+  function switchTab(name) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  // ── TNVR 互動卡片 ──
+  function toggleTnvr(element) {
+    element.style.transform = element.style.transform === 'scale(1.05)' ? 'scale(1)' : 'scale(1.05)';
+    element.style.boxShadow = element.style.boxShadow ? '' : '0 4px 16px rgba(21, 101, 192, 0.2)';
+  }
+
+  // ── 下載函數 ──
+  function downloadFlowchart() {
+    const link = document.createElement('a');
+    link.href = 'flowchart_v3.png';
+    link.download = 'Taiwan_Stray_Dog_Policy_Flowchart.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+</script>
+
+</body>
+</html>
