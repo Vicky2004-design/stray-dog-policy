@@ -127,6 +127,7 @@
         width: 100%;
       }
     }
+    
     .tab-btn {
       padding: 11px 26px;
       border-radius: 999px;
@@ -196,6 +197,54 @@
       font-size: 0.85rem;
       color: var(--muted);
       margin-bottom: 20px;
+    }
+
+    /* ── Expandable Cards ── */
+    .expand-card {
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+      border-left: 4px solid var(--accent-blue);
+      cursor: pointer;
+      transition: all 0.24s ease;
+    }
+    .expand-card:hover {
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+    .expand-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .expand-card-title {
+      font-weight: 700;
+      color: var(--accent-blue);
+      margin-bottom: 4px;
+    }
+    .expand-card-sub {
+      font-size: 0.85rem;
+      color: var(--secondary);
+    }
+    .expand-card-detail {
+      display: none;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--secondary);
+      line-height: 1.8;
+    }
+    .expand-card-detail.show {
+      display: block;
+    }
+    .expand-card-icon {
+      color: var(--accent-blue);
+      transition: transform 0.24s ease;
+    }
+    .expand-card-icon.rotated {
+      transform: rotate(180deg);
     }
 
     /* ── Diagram ── */
@@ -292,27 +341,71 @@
   <div id="tab-before" class="tab-panel">
     <div class="card">
       <div class="card-title"><i class="fas fa-times-circle"></i> 零撲殺前的政策流程</div>
-      <div class="card-sub">1998-2017 年間的做法</div>
-      <div style="margin-top:20px;">
-        <div style="background:var(--bg);border-radius:8px;padding:16px;margin-bottom:12px;border-left:4px solid var(--accent-red);">
-          <div style="font-weight:700;color:var(--accent-red);margin-bottom:8px;">通報/巡查發現遊蕩犬</div>
-          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">民眾或動物保護人員發現遊蕩犬時進行通報或巡查。</div>
+      <div class="card-sub">1998-2017 年間的做法（點擊下方卡片以查看詳細說明）</div>
+      <div style="margin-top:20px;display:flex;flex-direction:column;gap:12px;">
+        <div class="expand-card" onclick="toggleExpand(this, 'before')">
+          <div class="expand-card-header">
+            <div>
+              <div class="expand-card-title"><i class="fas fa-bell"></i> 1. 通報/巡查發現遊蕩犬</div>
+              <div class="expand-card-sub">民眾或動物保護人員發現遊蕩犬時進行通報或巡查</div>
+            </div>
+            <i class="fas fa-chevron-down expand-card-icon"></i>
+          </div>
+          <div class="expand-card-detail">
+            這是整個流程的起點。民眾發現遊蕩犬可透過 1959 動物保護專線通報，或由動物保護人員在巡查時發現。
+          </div>
         </div>
-        <div style="background:var(--bg);border-radius:8px;padding:16px;margin-bottom:12px;border-left:4px solid var(--accent-red);">
-          <div style="font-weight:700;color:var(--accent-red);margin-bottom:8px;">無差別捕捉</div>
-          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">不論犬隻行為特徵，一律進行捕捉。</div>
+        
+        <div class="expand-card" onclick="toggleExpand(this, 'before')">
+          <div class="expand-card-header">
+            <div>
+              <div class="expand-card-title"><i class="fas fa-cube"></i> 2. 無差別捕捉</div>
+              <div class="expand-card-sub">不論犬隻行為特徵，一律進行捕捉</div>
+            </div>
+            <i class="fas fa-chevron-down expand-card-icon"></i>
+          </div>
+          <div class="expand-card-detail">
+            這是舊制度的核心特點。無論犬隻是否具有攻擊性或危害性，防治所都會進行捕捉。這是後來改革的主要對象。
+          </div>
         </div>
-        <div style="background:var(--bg);border-radius:8px;padding:16px;margin-bottom:12px;border-left:4px solid var(--accent-red);">
-          <div style="font-weight:700;color:var(--accent-red);margin-bottom:8px;">送往收容所</div>
-          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">被捕捉的犬隻送入公立或民間收容所。</div>
+        
+        <div class="expand-card" onclick="toggleExpand(this, 'before')">
+          <div class="expand-card-header">
+            <div>
+              <div class="expand-card-title"><i class="fas fa-building"></i> 3. 送往收容所</div>
+              <div class="expand-card-sub">被捕捉的犬隻送入公立或民間收容所</div>
+            </div>
+            <i class="fas fa-chevron-down expand-card-icon"></i>
+          </div>
+          <div class="expand-card-detail">
+            被捕捉的犬隻會被送入公立收容所或民間狗園。收容所的空間與資源往往有限，這也是後來面臨的主要問題。
+          </div>
         </div>
-        <div style="background:var(--bg);border-radius:8px;padding:16px;margin-bottom:12px;border-left:4px solid var(--accent-red);">
-          <div style="font-weight:700;color:var(--accent-red);margin-bottom:8px;">期限內領回/送養</div>
-          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">通常為 12 天內，飼主可領回或由他人領養。</div>
+        
+        <div class="expand-card" onclick="toggleExpand(this, 'before')">
+          <div class="expand-card-header">
+            <div>
+              <div class="expand-card-title"><i class="fas fa-calendar"></i> 4. 期限內領回/送養</div>
+              <div class="expand-card-sub">通常為 12 天內，飼主可領回或由他人領養</div>
+            </div>
+            <i class="fas fa-chevron-down expand-card-icon"></i>
+          </div>
+          <div class="expand-card-detail">
+            根據動物保護法，收容所需保留犬隻 12 天。在此期間，飼主可以領回，或由他人領養。這是犬隻存活的最後機會。
+          </div>
         </div>
-        <div style="background:var(--bg);border-radius:8px;padding:16px;border-left:4px solid var(--accent-red);">
-          <div style="font-weight:700;color:var(--accent-red);margin-bottom:8px;">撲殺</div>
-          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">期限內未被領回或送養的犬隻將被安樂死。</div>
+        
+        <div class="expand-card" onclick="toggleExpand(this, 'before')">
+          <div class="expand-card-header">
+            <div>
+              <div class="expand-card-title" style="color:var(--accent-red)"><i class="fas fa-times"></i> 5. 撲殺</div>
+              <div class="expand-card-sub">期限內未被領回或送養的犬隻將被安樂死</div>
+            </div>
+            <i class="fas fa-chevron-down expand-card-icon"></i>
+          </div>
+          <div class="expand-card-detail">
+            12 天期限後，未被領回或送養的犬隻將被安樂死。這是舊制度中最具爭議的部分，也是零撲殺政策改革的主要原因。
+          </div>
         </div>
       </div>
     </div>
@@ -322,19 +415,45 @@
   <div id="tab-after" class="tab-panel">
     <div class="card">
       <div class="card-title"><i class="fas fa-check-circle"></i> 零撲殺後的政策流程</div>
-      <div class="card-sub">2017 年後的新制度</div>
-      <div style="margin-top:20px;">
-        <div style="background:var(--bg);border-radius:8px;padding:16px;margin-bottom:12px;border-left:4px solid var(--accent-green);">
-          <div style="font-weight:700;color:var(--accent-green);margin-bottom:8px;">行為風險評估</div>
-          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">根據犬隻的行為特徵進行風險分類，判斷是否為高風險個體。</div>
+      <div class="card-sub">2017 年後的新制度（點擊下方卡片以查看詳細說明）</div>
+      <div style="margin-top:20px;display:flex;flex-direction:column;gap:12px;">
+        <div class="expand-card" onclick="toggleExpand(this, 'after')">
+          <div class="expand-card-header">
+            <div>
+              <div class="expand-card-title"><i class="fas fa-balance-scale"></i> 行為風險評估</div>
+              <div class="expand-card-sub">根據犬隻的行為特徵進行風險分類</div>
+            </div>
+            <i class="fas fa-chevron-down expand-card-icon"></i>
+          </div>
+          <div class="expand-card-detail">
+            零撲殺後的第一步是評估犬隻的行為風險。防治所人員會根據犬隻是否具有攻擊性、追車傾向或對農牧場的危害等因素進行分類。
+          </div>
         </div>
-        <div style="background:var(--bg);border-radius:8px;padding:16px;margin-bottom:12px;border-left:4px solid var(--accent-green);">
-          <div style="font-weight:700;color:var(--accent-green);margin-bottom:8px;">高風險個體</div>
-          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">包括咬人、追車、對農牧場造成危害或在生態敏感區活動的犬隻。進行精準捕捉，帶離環境，不回置。</div>
+        
+        <div class="expand-card" onclick="toggleExpand(this, 'after')">
+          <div class="expand-card-header">
+            <div>
+              <div class="expand-card-title" style="color:var(--accent-red)"><i class="fas fa-exclamation-triangle"></i> 高風險個體</div>
+              <div class="expand-card-sub">包括咬人、追車、對農牧場造成危害等</div>
+            </div>
+            <i class="fas fa-chevron-down expand-card-icon"></i>
+          </div>
+          <div class="expand-card-detail">
+            高風險個體包括：有咬人紀錄的犬隻、追車習慣的犬隻、對農牧場造成危害的犬隻、在生態敏感區活動的犬隻。這些犬隻會進行精準捕捉，帶離環境，不回置，通常進行收容或其他安置。
+          </div>
         </div>
-        <div style="background:var(--bg);border-radius:8px;padding:16px;border-left:4px solid var(--accent-green);">
-          <div style="font-weight:700;color:var(--accent-green);margin-bottom:8px;">低風險個體 - TNVR</div>
-          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">進行誘捕、結紮、疫苗接種，然後回置至原捕捉地點附近，以控制繁殖並提升免疫覆蓋率。</div>
+        
+        <div class="expand-card" onclick="toggleExpand(this, 'after')">
+          <div class="expand-card-header">
+            <div>
+              <div class="expand-card-title" style="color:var(--accent-green)"><i class="fas fa-heart"></i> 低風險個體 - TNVR</div>
+              <div class="expand-card-sub">進行誘捕、結紮、疫苗接種、回置</div>
+            </div>
+            <i class="fas fa-chevron-down expand-card-icon"></i>
+          </div>
+          <div class="expand-card-detail">
+            低風險個體會進行 TNVR 處理：誘捕、結紮、疫苗接種，然後回置至原捕捉地點附近。目標是控制繁殖並提升免疫覆蓋率，實現長期、人道的族群管理。
+          </div>
         </div>
       </div>
     </div>
@@ -344,23 +463,58 @@
   <div id="tab-tnvr" class="tab-panel">
     <div class="card">
       <div class="card-title"><i class="fas fa-heart"></i> TNVR 四步驟</div>
-      <div class="card-sub">Trap-Neuter-Vaccinate-Return 人道管理機制</div>
-      <div style="margin-top:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
-        <div class="tnvr-card" onclick="toggleTnvr(this)" style="background:var(--bg);border-radius:8px;padding:16px;border-left:4px solid var(--accent-blue);cursor:pointer;transition:all 0.24s ease;">
-          <div style="font-weight:700;color:var(--accent-blue);margin-bottom:8px;"><i class="fas fa-cube"></i> T - 誘捕</div>
-          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">使用誘捕籠或其他人道方式，將遊蕩犬安全地捕捉。</div>
+      <div class="card-sub">Trap-Neuter-Vaccinate-Return 人道管理機制（點擊下方卡片以查看詳細說明）</div>
+      <div style="margin-top:20px;display:flex;flex-direction:column;gap:12px;">
+        <div class="expand-card" onclick="toggleExpand(this, 'tnvr')">
+          <div class="expand-card-header">
+            <div>
+              <div class="expand-card-title"><i class="fas fa-cube"></i> T - 誘捕</div>
+              <div class="expand-card-sub">Trap: 使用誘捕籠或其他人道方式</div>
+            </div>
+            <i class="fas fa-chevron-down expand-card-icon"></i>
+          </div>
+          <div class="expand-card-detail">
+            誘捕是 TNVR 的第一步。使用誘捕籠、羅網或其他人道方式，將遊蕩犬安全地捕捉，不造成傷害。誘捕需要技巧和耐心，確保犬隻安全。
+          </div>
         </div>
-        <div class="tnvr-card" onclick="toggleTnvr(this)" style="background:var(--bg);border-radius:8px;padding:16px;border-left:4px solid var(--accent-blue);cursor:pointer;transition:all 0.24s ease;">
-          <div style="font-weight:700;color:var(--accent-blue);margin-bottom:8px;"><i class="fas fa-scissors"></i> N - 結紮</div>
-          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">進行外科手術進行結紮，防止自然繁殖，長期控制族群規模。</div>
+        
+        <div class="expand-card" onclick="toggleExpand(this, 'tnvr')">
+          <div class="expand-card-header">
+            <div>
+              <div class="expand-card-title"><i class="fas fa-scissors"></i> N - 結紮</div>
+              <div class="expand-card-sub">Neuter: 進行結紮手術</div>
+            </div>
+            <i class="fas fa-chevron-down expand-card-icon"></i>
+          </div>
+          <div class="expand-card-detail">
+            結紮是 TNVR 的核心。通過外科手術進行結紮，防止自然繁殖，是長期控制遊蕩犬族群數量的最有效方法。結紮率需達到 70-85% 才能有效控制族群。
+          </div>
         </div>
-        <div class="tnvr-card" onclick="toggleTnvr(this)" style="background:var(--bg);border-radius:8px;padding:16px;border-left:4px solid var(--accent-blue);cursor:pointer;transition:all 0.24s ease;">
-          <div style="font-weight:700;color:var(--accent-blue);margin-bottom:8px;"><i class="fas fa-syringe"></i> V - 疆苗</div>
-          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">施打疫苗（特別是狂犬病疫苗），提升族群免疫力，保護公共衛生。</div>
+        
+        <div class="expand-card" onclick="toggleExpand(this, 'tnvr')">
+          <div class="expand-card-header">
+            <div>
+              <div class="expand-card-title"><i class="fas fa-syringe"></i> V - 疫苗</div>
+              <div class="expand-card-sub">Vaccinate: 施打疫苗</div>
+            </div>
+            <i class="fas fa-chevron-down expand-card-icon"></i>
+          </div>
+          <div class="expand-card-detail">
+            疫苗是下一個關鍵步驟。特別是狂犬病疫苗，是公共衛生的重要一環。透過施打疫苗，提升遊蕩犬族群的免疫覆蓋率，保護人類和其他動物。
+          </div>
         </div>
-        <div class="tnvr-card" onclick="toggleTnvr(this)" style="background:var(--bg);border-radius:8px;padding:16px;border-left:4px solid var(--accent-blue);cursor:pointer;transition:all 0.24s ease;">
-          <div style="font-weight:700;color:var(--accent-blue);margin-bottom:8px;"><i class="fas fa-map-marker-alt"></i> R - 回置</div>
-          <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">將犬隻回置至原捕捉地點附近，恢復其原有的生活環境。</div>
+        
+        <div class="expand-card" onclick="toggleExpand(this, 'tnvr')">
+          <div class="expand-card-header">
+            <div>
+              <div class="expand-card-title"><i class="fas fa-map-marker-alt"></i> R - 回置</div>
+              <div class="expand-card-sub">Return: 回置至原地</div>
+            </div>
+            <i class="fas fa-chevron-down expand-card-icon"></i>
+          </div>
+          <div class="expand-card-detail">
+            回置是 TNVR 的最後一步。將結紮、接種後的犬隻回置至原捕捉地點附近。這樣可以維持族群的穩定性，同時也是最人道的做法。
+          </div>
         </div>
       </div>
     </div>
@@ -427,10 +581,28 @@
     event.currentTarget.classList.add('active');
   }
 
-  // ── TNVR 互動卡片 ──
-  function toggleTnvr(element) {
-    element.style.transform = element.style.transform === 'scale(1.05)' ? 'scale(1)' : 'scale(1.05)';
-    element.style.boxShadow = element.style.boxShadow ? '' : '0 4px 16px rgba(21, 101, 192, 0.2)';
+  // ── 展開式卡片切換 ──
+  function toggleExpand(element, category) {
+    const detail = element.querySelector('.expand-card-detail');
+    const icon = element.querySelector('.expand-card-icon');
+    
+    // 關閉同類別的其他卡片
+    document.querySelectorAll('.expand-card').forEach(card => {
+      if (card !== element) {
+        const cardDetail = card.querySelector('.expand-card-detail');
+        const cardIcon = card.querySelector('.expand-card-icon');
+        if (cardDetail && cardIcon) {
+          cardDetail.classList.remove('show');
+          cardIcon.classList.remove('rotated');
+        }
+      }
+    });
+    
+    // 切換當前卡片
+    if (detail && icon) {
+      detail.classList.toggle('show');
+      icon.classList.toggle('rotated');
+    }
   }
 
   // ── 下載函數 ──
