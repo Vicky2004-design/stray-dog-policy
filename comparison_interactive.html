@@ -256,6 +256,13 @@
       line-height: 1.6;
     }
 
+    .source-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 8px;
+      font-style: italic;
+    }
+
     /* ── Data Explanation ── */
     .data-explanation {
       background: rgba(0,0,0,0.03);
@@ -380,7 +387,7 @@
     <button class="btn" onclick="toggleTheme()" id="theme-btn"><i class="fas fa-moon"></i> 深色模式</button>
   </div>
   <h1>多維度政策雷達圖分析</h1>
-  <p>透過量化評分與科學指標，從五大維度對比全球遊蕩犬管理政策的優劣與特色</p>
+  <p>基於官方法規與統計數據，從五大維度對比全球遊蕩犬管理政策的優劣與特色</p>
 </header>
 
 <main>
@@ -436,92 +443,92 @@
             <!-- 源頭管控 -->
             <tr>
               <td rowspan="4" class="score-cell">源頭管控<br>(0-10)</td>
-              <td class="score-cell">9-10</td>
-              <td class="indicator-cell"><strong>德國</strong>：強制全國晶片登記制、高額養狗稅、棄養罰金 2.5-2.5 萬歐元、違法飼養罰款可達 5 萬歐元。</td>
+              <td class="score-cell">10</td>
+              <td class="indicator-cell"><strong>德國</strong>：強制全國晶片與登記制、各州實施養狗稅。棄養罰金最高 25,000 歐元 (§18 Para. 4 Tierschutzgesetz)，最新修正案提升至 45,000 歐元並可處 3 年有期徒刑。<span class="source-note">來源：德國動物保護法 (Tierschutzgesetz)</span></td>
             </tr>
             <tr>
-              <td class="score-cell">7-8</td>
-              <td class="indicator-cell"><strong>荷蘭</strong>：強制登記、差異化養狗稅、高額罰款（棄養罰金 1.5 萬歐元以上）、社會文化高度支持。</td>
+              <td class="score-cell">9</td>
+              <td class="indicator-cell"><strong>荷蘭</strong>：實施 CNVR 全國性絕育計畫、強制登記、寵物稅制度。棄養罰金最高 16,750 歐元並可處 3 年有期徒刑。2019 年宣佈成為全球首個「無流浪犬」國家。<span class="source-note">來源：荷蘭動物法 (Wet dieren)、CNVR 計畫官方報告</span></td>
             </tr>
             <tr>
-              <td class="score-cell">6-7</td>
-              <td class="indicator-cell"><strong>新加坡</strong>：登記制度完善、政府與民間合作、但執行力度不如德國嚴格、罰金相對較低。</td>
+              <td class="score-cell">7</td>
+              <td class="indicator-cell"><strong>新加坡</strong>：實施犬隻執照制度、TNRM 計畫納入官方管理。法規完善但罰金相對較低。<span class="source-note">來源：新加坡動物與獸醫局 (AVS) 官方網站</span></td>
             </tr>
             <tr>
-              <td class="score-cell">3-5</td>
-              <td class="indicator-cell"><strong>臺灣</strong>：雖有登記制度但執行率不一、棄養罰則最高 1.5 萬台幣（約 500 歐元）、實際裁罰案件比例低、源頭管控力度不足。</td>
+              <td class="score-cell">5</td>
+              <td class="indicator-cell"><strong>臺灣</strong>：現行棄養罰鍰 3-15 萬台幣。2026 年 1 月行政院通過修法草案，將提升至 10-100 萬台幣。實際裁罰比例仍低。<span class="source-note">來源：動物保護法、行政院 2026 年 1 月修法公告</span></td>
             </tr>
 
             <!-- 結紮效率 -->
             <tr>
               <td rowspan="4" class="score-cell">結紮效率<br>(0-10)</td>
-              <td class="score-cell">8-10</td>
-              <td class="indicator-cell"><strong>荷蘭、德國</strong>：遊蕩犬絕育率 95% 以上、官方與民間組織配合、系統化管理。</td>
+              <td class="score-cell">10</td>
+              <td class="indicator-cell"><strong>荷蘭</strong>：透過 CNVR 計畫達成 95% 以上遊蕩犬絕育率，成功實現零流浪犬目標。<span class="source-note">來源：Dutch Review、荷蘭官方報告</span></td>
             </tr>
             <tr>
-              <td class="score-cell">7-8</td>
-              <td class="indicator-cell"><strong>新加坡</strong>：TNRM 制度化管理、達成 80% 以上遊蕩犬絕育率、持續推進中。</td>
+              <td class="score-cell">9</td>
+              <td class="indicator-cell"><strong>德國</strong>：社會文化與法律框架支撐下，遊蕩犬絕育率極高，世界公認標竿。<span class="source-note">來源：歐盟動物福利標準、德國各州統計</span></td>
             </tr>
             <tr>
-              <td class="score-cell">4-6</td>
-              <td class="indicator-cell"><strong>臺灣</strong>：絕育計畫推行中但覆蓋率有限、民間組織參與度不均、棄養問題導致新增遊蕩犬速度超過絕育速度。</td>
+              <td class="score-cell">8</td>
+              <td class="indicator-cell"><strong>新加坡</strong>：TNRM 計畫截至 2023 年 11 月達成 80% 絕育率 (超過 4,000 隻)，持續推進中。<span class="source-note">來源：新加坡 AVS 官方統計 (2023年11月)</span></td>
             </tr>
             <tr>
-              <td class="score-cell">-</td>
-              <td class="indicator-cell">-</td>
+              <td class="score-cell">6</td>
+              <td class="indicator-cell"><strong>臺灣</strong>：絕育計畫推行中但覆蓋率有限。2024 年遊蕩犬數量推估 141,584 隻，較 2022 年減少 11.34%，為 2018 年以來首次下降。<span class="source-note">來源：農業部 2024 年全國遊蕩犬調查推估</span></td>
             </tr>
 
             <!-- 飼主責任 -->
             <tr>
               <td rowspan="4" class="score-cell">飼主責任<br>(0-10)</td>
-              <td class="score-cell">8-10</td>
-              <td class="indicator-cell"><strong>德國、荷蘭</strong>：法律明確定義飼主義務、虐待或棄養可處監禁、社會文化強化責任意識。</td>
+              <td class="score-cell">10</td>
+              <td class="indicator-cell"><strong>德國</strong>：法律明確定義飼主義務、虐待或棄養可處監禁、社會文化強化責任意識。<span class="source-note">來源：德國動物保護法</span></td>
             </tr>
             <tr>
-              <td class="score-cell">6-7</td>
-              <td class="indicator-cell"><strong>新加坡</strong>：飼主責任法規完善、但執行力度略低、社區教育持續進行。</td>
+              <td class="score-cell">9</td>
+              <td class="indicator-cell"><strong>荷蘭</strong>：飼主責任法規完善、可處監禁、社會文化高度重視動物福利。<span class="source-note">來源：荷蘭動物法</span></td>
             </tr>
             <tr>
-              <td class="score-cell">3-5</td>
-              <td class="indicator-cell"><strong>臺灣</strong>：雖有動物保護法但飼主責任條款執行不力、棄養行為未受有效遏止、社會責任意識仍需加強。</td>
+              <td class="score-cell">7</td>
+              <td class="indicator-cell"><strong>新加坡</strong>：飼主責任法規完善、執法力度中等、社區教育持續進行。<span class="source-note">來源：新加坡 AVS 官方資訊</span></td>
             </tr>
             <tr>
-              <td class="score-cell">-</td>
-              <td class="indicator-cell">-</td>
+              <td class="score-cell">4</td>
+              <td class="indicator-cell"><strong>臺灣</strong>：雖有動物保護法但飼主責任條款執行不力。2021-2023 年間棄養檢舉 3,455 件，實際裁處 2,304 件，裁處比例約 67%。<span class="source-note">來源：台灣動物保護行政監督聯盟、農業部統計</span></td>
             </tr>
 
             <!-- 法律嚴謹度 -->
             <tr>
               <td rowspan="4" class="score-cell">法律嚴謹度<br>(0-10)</td>
-              <td class="score-cell">9-10</td>
-              <td class="indicator-cell"><strong>德國</strong>：動物保護法完整、違規罰金高達 5 萬歐元、可處監禁、執法力度強。</td>
+              <td class="score-cell">10</td>
+              <td class="indicator-cell"><strong>德國</strong>：動物保護法完整、違規罰金高達 25,000-45,000 歐元、可處監禁、執法力度強。<span class="source-note">來源：德國動物保護法 (Tierschutzgesetz)</span></td>
             </tr>
             <tr>
-              <td class="score-cell">8</td>
-              <td class="indicator-cell"><strong>荷蘭</strong>：法規嚴謹、罰金 1.5 萬歐元以上、可處監禁、執法一致。</td>
+              <td class="score-cell">9</td>
+              <td class="indicator-cell"><strong>荷蘭</strong>：法規嚴謹、罰金 16,750 歐元以上、可處監禁、執法一致。<span class="source-note">來源：荷蘭動物法</span></td>
             </tr>
             <tr>
-              <td class="score-cell">6-7</td>
-              <td class="indicator-cell"><strong>新加坡</strong>：法規完善但罰金相對較低、執法力度中等。</td>
+              <td class="score-cell">7</td>
+              <td class="indicator-cell"><strong>新加坡</strong>：法規完善但罰金相對較低、執法力度中等。<span class="source-note">來源：新加坡動物法規</span></td>
             </tr>
             <tr>
-              <td class="score-cell">3-5</td>
-              <td class="indicator-cell"><strong>臺灣</strong>：動物保護法存在但罰金上限 1.5 萬台幣、實際裁罰案件少、法律嚴謹度不足。</td>
+              <td class="score-cell">5</td>
+              <td class="indicator-cell"><strong>臺灣</strong>：動物保護法存在但罰金上限 15 萬台幣 (修法後 100 萬)、實際裁罰案件少。2026 年修法後預期提升。<span class="source-note">來源：動物保護法、行政院 2026 年修法公告</span></td>
             </tr>
 
             <!-- 社會支持度 -->
             <tr>
               <td rowspan="4" class="score-cell">社會支持度<br>(0-10)</td>
-              <td class="score-cell">8-10</td>
-              <td class="indicator-cell"><strong>德國、荷蘭</strong>：社會文化高度重視動物福利、志工參與度高、公眾教育完善。</td>
+              <td class="score-cell">9</td>
+              <td class="indicator-cell"><strong>德國、荷蘭</strong>：社會文化高度重視動物福利、志工參與度高、公眾教育完善。<span class="source-note">來源：歐盟動物福利調查、各國民調</span></td>
             </tr>
             <tr>
-              <td class="score-cell">7-8</td>
-              <td class="indicator-cell"><strong>新加坡</strong>：政府與民間組織深度合作、社區志工積極參與、公眾教育持續推進。</td>
+              <td class="score-cell">8</td>
+              <td class="indicator-cell"><strong>新加坡</strong>：政府與民間組織深度合作、社區志工積極參與、TNRM 計畫公眾支持度高。<span class="source-note">來源：新加坡 AVS 計畫報告</span></td>
             </tr>
             <tr>
-              <td class="score-cell">4-6</td>
-              <td class="indicator-cell"><strong>臺灣</strong>：民間組織與志工參與度高但資源分散、不當餵食問題嚴重、公眾教育成效有限。</td>
+              <td class="score-cell">6</td>
+              <td class="indicator-cell"><strong>臺灣</strong>：民間組織與志工參與度高但資源分散、不當餵食問題嚴重、公眾教育成效有限。<span class="source-note">來源：農業部、動物保護組織調查</span></td>
             </tr>
             <tr>
               <td class="score-cell">-</td>
@@ -533,10 +540,10 @@
         <div class="data-explanation">
           <h4><i class="fas fa-info-circle"></i> 資料來源與評分說明</h4>
           <ul>
-            <li><strong>德國數據</strong>：德國動物保護法 (Tierschutzgesetz)、各州法規、歐盟動物福利標準。</li>
-            <li><strong>荷蘭數據</strong>：荷蘭 2019 年零流浪犬達成報告、動物福利法規。</li>
-            <li><strong>新加坡數據</strong>：新加坡動物與獸醫局 (AVA) 官方統計、TNRM 計畫成效報告。</li>
-            <li><strong>臺灣數據</strong>：動物保護法、各縣市動物防疫處統計、零撲殺政策評估報告。</li>
+            <li><strong>德國</strong>：德國動物保護法 (Tierschutzgesetz, TierSchG) §18 Para. 4、各州法規、歐盟動物福利標準。</li>
+            <li><strong>荷蘭</strong>：荷蘭動物法 (Wet dieren)、CNVR 計畫官方報告、2019 年零流浪犬宣佈。</li>
+            <li><strong>新加坡</strong>：新加坡動物與獸醫局 (AVS) 官方網站、TNRM 計畫 2023 年 11 月統計報告。</li>
+            <li><strong>臺灣</strong>：動物保護法、行政院 2026 年 1 月修法公告、農業部 2024 年全國遊蕩犬調查推估、台灣動物保護行政監督聯盟統計。</li>
             <li><strong>評分方法</strong>：綜合法律完整性、執法力度、社會支持度與實際成效進行 0-10 分評分。</li>
           </ul>
         </div>
@@ -564,7 +571,7 @@
           <div class="section-title" style="font-size: 1rem; border: none; padding: 0; margin-bottom: 15px;"><i class="fas fa-check"></i> 成功因素</div>
           <ul class="section-list">
             <li><i class="fas fa-circle"></i> 政府與民間組織深度跨部門合作。</li>
-            <li><i class="fas fa-circle"></i> 達成八成以上遊蕩犬絕育率之門檻。</li>
+            <li><i class="fas fa-circle"></i> 截至 2023 年 11 月達成 80% 遊蕩犬絕育率。</li>
             <li><i class="fas fa-circle"></i> 強調公眾教育與社區志工的長期管理。</li>
           </ul>
         </div>
@@ -586,7 +593,7 @@
           <div class="section-title" style="font-size: 1rem; border: none; padding: 0; margin-bottom: 15px;"><i class="fas fa-check"></i> 成功因素</div>
           <ul class="section-list">
             <li><i class="fas fa-circle"></i> 強制性晶片植入與全國統一登記制。</li>
-            <li><i class="fas fa-circle"></i> 嚴格的動物保護法規與高額違規罰金。</li>
+            <li><i class="fas fa-circle"></i> 嚴格的動物保護法規與高額違規罰金 (25,000-45,000 歐元)。</li>
             <li><i class="fas fa-circle"></i> 社會文化將犬隻視為具法律地位的家庭成員。</li>
           </ul>
         </div>
@@ -607,8 +614,8 @@
           
           <div class="section-title" style="font-size: 1rem; border: none; padding: 0; margin-bottom: 15px;"><i class="fas fa-check"></i> 成功因素</div>
           <ul class="section-list">
-            <li><i class="fas fa-circle"></i> 實施強制登記與差異化養狗稅。</li>
-            <li><i class="fas fa-circle"></i> 對虐待或棄養行為處以高額罰款甚至監禁。</li>
+            <li><i class="fas fa-circle"></i> 實施 CNVR 全國性絕育計畫與強制登記。</li>
+            <li><i class="fas fa-circle"></i> 對虐待或棄養行為處以高額罰款 (16,750 歐元) 甚至監禁。</li>
             <li><i class="fas fa-circle"></i> 國家具備高度經濟與社會福利基礎支撐。</li>
           </ul>
         </div>
@@ -624,14 +631,14 @@
         <div class="card-content">
           <div class="section-title" style="font-size: 1rem; border: none; padding: 0; margin-bottom: 15px;"><i class="fas fa-exclamation-triangle"></i> 核心策略</div>
           <ul class="section-list">
-            <li>目前處於「零撲殺」轉型期，配套措施仍待加強。</li>
+            <li>目前處於「零撲殺」轉型期，配套措施正在強化中 (2026 年修法)。</li>
           </ul>
           
           <div class="section-title" style="font-size: 1rem; border: none; padding: 0; margin-bottom: 15px;"><i class="fas fa-sync"></i> 當前挑戰</div>
           <ul class="section-list">
             <li><i class="fas fa-circle"></i> 非科學化的不當餵食行為導致族群擴張。</li>
-            <li><i class="fas fa-circle"></i> 棄養行為未受有效根除，收容體系飽和。</li>
-            <li><i class="fas fa-circle"></i> 遊蕩犬總數仍維持高位，人犬衝突頻發。</li>
+            <li><i class="fas fa-circle"></i> 棄養行為未受有效根除，實際裁罰比例低。</li>
+            <li><i class="fas fa-circle"></i> 2024 年遊蕩犬數量推估 141,584 隻，雖較 2022 年減少 11.34%，但仍需多管齊下。</li>
           </ul>
         </div>
       </div>
@@ -648,7 +655,7 @@
   const policyData = {
     '新加坡': {
       label: '新加坡 (TNRM)',
-      data: [7, 8, 6, 7, 8],
+      data: [7, 8, 7, 7, 8],
       borderColor: '#FF6B6B',
       backgroundColor: 'rgba(255, 107, 107, 0.15)',
       borderWidth: 3,
@@ -657,7 +664,7 @@
     },
     '德國': {
       label: '德國 (源頭管控)',
-      data: [9, 7, 9, 9, 7],
+      data: [10, 9, 10, 10, 9],
       borderColor: '#1a1a1a',
       backgroundColor: 'rgba(26, 26, 26, 0.15)',
       borderWidth: 3,
@@ -666,7 +673,7 @@
     },
     '荷蘭': {
       label: '荷蘭 (多管齊下)',
-      data: [8, 8, 8, 8, 8],
+      data: [9, 10, 9, 9, 9],
       borderColor: '#4ECDC4',
       backgroundColor: 'rgba(78, 205, 196, 0.15)',
       borderWidth: 3,
@@ -675,7 +682,7 @@
     },
     '臺灣': {
       label: '臺灣 (零撲殺)',
-      data: [4, 5, 4, 4, 5],
+      data: [5, 6, 4, 5, 6],
       borderColor: '#FFB347',
       backgroundColor: 'rgba(255, 179, 71, 0.15)',
       borderWidth: 3,
