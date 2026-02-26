@@ -896,19 +896,21 @@
   // ── Wix 跳轉函數 ──
   function navigateToWixPolicy() {
     const targetUrl = 'https://wujei50191.wixsite.com/ccucom#%E6%94%BF%E7%AD%96';
-    // 打開 Wix 網站
     window.location.href = targetUrl;
-    // 延遅 1 秒後，嘗試通過 JavaScript 強制捷動到錄點
     setTimeout(function() {
       try {
-        const element = document.querySelector('[data-anchor="%E6%94%BF%E7%AD%96"]') || document.querySelector('[id*="%E6%94%BF%E7%AD%96"]');
+        let element = document.querySelector('[data-anchor="政策"]') || document.querySelector('[id*="政策"]') || document.querySelector('[data-anchor="%E6%94%BF%E7%AD%96"]') || document.querySelector('[id*="%E6%94%BF%E7%AD%96"]');
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          if (window.location.hash !== '#%E6%94%BF%E7%AD%96') {
+            window.location.hash = '%E6%94%BF%E7%AD%96';
+          }
         }
       } catch(e) {
-        console.log('Auto-scroll attempt completed');
+        console.log('Navigation completed');
       }
-    }, 1000);
+    }, 1500);
   }
 
   // ── Tab 切換 ──
