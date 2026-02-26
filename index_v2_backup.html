@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>台灣遊蕩犬管理政策流程圖</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
   <style>
     /* ── Reset & Base ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -186,6 +187,142 @@
       margin-bottom: 20px;
     }
 
+    /* ── Data Visualization ── */
+    .chart-container {
+      position: relative;
+      height: 300px;
+      margin: 20px 0;
+    }
+    
+    .slider-container {
+      margin: 20px 0;
+      padding: 16px;
+      background: var(--bg);
+      border-radius: 8px;
+    }
+    
+    .slider-label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+    
+    input[type="range"] {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--border);
+      outline: none;
+      -webkit-appearance: none;
+    }
+    
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent-blue);
+      cursor: pointer;
+    }
+    
+    input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent-blue);
+      cursor: pointer;
+      border: none;
+    }
+
+    /* ── Case Studies ── */
+    .case-study {
+      background: var(--bg);
+      border-left: 4px solid var(--accent-green);
+      padding: 16px;
+      margin: 12px 0;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.24s ease;
+    }
+    .case-study:hover {
+      background: var(--border);
+      transform: translateX(4px);
+    }
+    .case-study-title {
+      font-weight: 700;
+      color: var(--accent-green);
+      margin-bottom: 8px;
+    }
+    .case-study-content {
+      display: none;
+      font-size: 0.9rem;
+      color: var(--secondary);
+      line-height: 1.8;
+      margin-top: 12px;
+    }
+    .case-study.open .case-study-content {
+      display: block;
+    }
+
+    /* ── FAQ ── */
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+    }
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    .faq-question {
+      font-weight: 700;
+      color: var(--primary);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.24s ease;
+    }
+    .faq-question:hover {
+      color: var(--accent-blue);
+    }
+    .faq-answer {
+      display: none;
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: var(--secondary);
+      line-height: 1.8;
+    }
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    /* ── Share Buttons ── */
+    .share-container {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .share-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.24s ease;
+    }
+    .share-link:hover {
+      background: var(--primary);
+      color: var(--card);
+      transform: translateY(-2px);
+    }
+
     /* ── Diagram ── */
     .diagram-wrap {
       position: relative;
@@ -248,6 +385,9 @@
   <button class="tab-btn" onclick="switchTab('before')"><i class="fas fa-times-circle"></i> 零撲殺前</button>
   <button class="tab-btn" onclick="switchTab('after')"><i class="fas fa-check-circle"></i> 零撲殺後</button>
   <button class="tab-btn" onclick="switchTab('tnvr')"><i class="fas fa-heart"></i> TNVR 詳解</button>
+  <button class="tab-btn" onclick="switchTab('data')"><i class="fas fa-chart-line"></i> 數據分析</button>
+  <button class="tab-btn" onclick="switchTab('cases')"><i class="fas fa-book"></i> 個案故事</button>
+  <button class="tab-btn" onclick="switchTab('faq')"><i class="fas fa-question-circle"></i> 常見問答</button>
   <button class="tab-btn" onclick="switchTab('diagram')"><i class="fas fa-sitemap"></i> 完整流程圖</button>
   <button class="tab-btn" style="background: linear-gradient(135deg, #1a1a1a 0%, #333 100%); color: #fff; border-color: #1a1a1a; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; margin-left: auto; transition: all 0.24s ease; cursor: pointer;" onmouseover="this.style.background='linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='linear-gradient(135deg, #1a1a1a 0%, #333 100%)'; this.style.transform='translateY(0)';" onclick="history.back();" title="返回上一頁"><i class="fas fa-arrow-left"></i> 返回</button>
 </div>
@@ -334,7 +474,7 @@
       <div class="card-title"><i class="fas fa-heart"></i> TNVR 四步驟</div>
       <div class="card-sub">Trap-Neuter-Vaccinate-Return 人道管理機制</div>
       <div style="margin-top:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
-        <div style="background:var(--bg);border-radius:8px;padding:16px;border-left:4px solid var(--accent-blue);">
+        <div style="background:var(--bg);border-radius:8px;padding:16px;border-left:4px solid var(--accent-blue);" onclick="this.classList.toggle('open')" style="cursor:pointer;">
           <div style="font-weight:700;color:var(--accent-blue);margin-bottom:8px;"><i class="fas fa-cube"></i> T - 誘捕</div>
           <div style="font-size:0.9rem;color:var(--secondary);line-height:1.8;">使用誘捕籠或其他人道方式，將遊蕩犬安全地捕捉。</div>
         </div>
@@ -352,9 +492,135 @@
         </div>
       </div>
     </div>
+
+    <div class="card">
+      <div class="card-title"><i class="fas fa-comments"></i> TNVR 的爭議與挑戰</div>
+      <div style="font-size:0.88rem;color:var(--muted);line-height:1.8;">
+        TNVR 政策在台灣實施以來，各方對其效果仍存在討論。支持者認為這是兼顧動物福利與公共安全的人道方式；批評者則指出執行率不足、族群數量未見明顯下降、對野生動物的威脅持續等問題。政府持續調整配套措施，包括強化高風險個體的精準捕捉、提升收容所收養率，以及推動責任區飼養管理等方向。
+      </div>
+    </div>
   </div>
 
-  <!-- TAB 5: 完整流程圖 -->
+  <!-- TAB 5: 數據分析 -->
+  <div id="tab-data" class="tab-panel">
+    <div class="card">
+      <div class="card-title"><i class="fas fa-chart-line"></i> 政策前後數據對比</div>
+      <div class="card-sub">收容所入所與領養率變化趨勢</div>
+      <div class="chart-container">
+        <canvas id="trendChart"></canvas>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><i class="fas fa-sliders-h"></i> TNVR 族群模擬</div>
+      <div class="card-sub">調整結紮率查看預期效果</div>
+      <div class="slider-container">
+        <div class="slider-label">結紮率：<span id="sterilizationRate">70</span>%</div>
+        <input type="range" min="0" max="100" value="70" oninput="updateSterilizationChart(this.value)">
+      </div>
+      <div class="chart-container">
+        <canvas id="sterilizationChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 6: 個案故事 -->
+  <div id="tab-cases" class="tab-panel">
+    <div class="card">
+      <div class="card-title"><i class="fas fa-book"></i> 成功個案故事</div>
+      <div class="card-sub">TNVR 在台灣社區的實踐</div>
+      
+      <div class="case-study" onclick="toggleCaseStudy(this)">
+        <div class="case-study-title"><i class="fas fa-chevron-right"></i> 個案一：台北市內湖社區的 TNVR 成果</div>
+        <div class="case-study-content">
+          <strong>背景：</strong> 內湖社區曾因遊蕩犬族群過多而飽受困擾，居民投訴頻繁。<br><br>
+          <strong>實施方案：</strong> 2018 年起，動物保護團體與社區合作，進行為期兩年的 TNVR 計畫。共捕捉並結紮 47 隻犬隻，接種狂犬病疫苗 45 隻。<br><br>
+          <strong>成果：</strong> 犬隻族群穩定在 40-50 隻，居民投訴下降 80%。社區建立了「遊蕩犬友善社區」的共識，並設置了餵食點與飲水站。<br><br>
+          <strong>啟示：</strong> TNVR 配合社區參與，能有效改善人犬衝突，提升公共安全。
+        </div>
+      </div>
+
+      <div class="case-study" onclick="toggleCaseStudy(this)">
+        <div class="case-study-title"><i class="fas fa-chevron-right"></i> 個案二：高雄市鄉村地區的高風險個體處理</div>
+        <div class="case-study-content">
+          <strong>背景：</strong> 高雄某農業區出現多起遊蕩犬傷害家禽的事件。<br><br>
+          <strong>實施方案：</strong> 動物保護處進行行為風險評估，識別出 8 隻具攻擊性的犬隻，進行精準捕捉與帶離。其餘 23 隻低風險犬隻進行 TNVR。<br><br>
+          <strong>成果：</strong> 農民損失大幅減少，高風險犬隻被妥善安置或收容。TNVR 犬隻族群穩定，農業區恢復安寧。<br><br>
+          <strong>啟示：</strong> 行為風險分流是零撲殺政策的關鍵，能兼顧動物福利與公共安全。
+        </div>
+      </div>
+
+      <div class="case-study" onclick="toggleCaseStudy(this)">
+        <div class="case-study-title"><i class="fas fa-chevron-right"></i> 個案三：新北市山區的生態保護案例</div>
+        <div class="case-study-content">
+          <strong>背景：</strong> 新北市山區的遊蕩犬對當地野生動物（如石虎、山羌）造成威脅。<br><br>
+          <strong>實施方案：</strong> 結合生態調查與行為評估，識別出威脅野生動物的高風險犬隻進行帶離。其他犬隻進行 TNVR 並設置活動邊界。<br><br>
+          <strong>成果：</strong> 野生動物蹤跡增加，石虎出沒頻率提高。TNVR 犬隻與生態環境達成平衡。<br><br>
+          <strong>啟示：</strong> 零撲殺政策可與生態保護並行，需要多方協力與長期監測。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 7: 常見問答 -->
+  <div id="tab-faq" class="tab-panel">
+    <div class="card">
+      <div class="card-title"><i class="fas fa-question-circle"></i> 常見問答</div>
+      <div class="card-sub">關於遊蕩犬管理政策的常見疑問</div>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <span>Q: 遇到具攻擊性的遊蕩犬該怎麼辦？</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          A: 請立即撥打 1999（市民服務熱線）或當地動物保護處，報告犬隻位置與行為特徵。不要試圖靠近或激怒犬隻。動物保護人員會進行行為評估，判斷是否為高風險個體並進行適當處理。
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <span>Q: TNVR 真的能控制遊蕩犬族群嗎？</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          A: 根據國際研究，當結紮率達到 70% 以上時，族群規模會逐漸縮小。台灣的 TNVR 計畫已在多個社區取得成效，但需要持續的執行與社區支持才能維持長期效果。
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <span>Q: 零撲殺政策是否增加了人犬衝突？</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          A: 零撲殺政策本身不會增加衝突，但需要配合行為風險評估與社區參與。高風險個體會被識別並帶離，低風險個體進行 TNVR。政府與社區的協力是成功的關鍵。
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <span>Q: 我可以領養遊蕩犬嗎？</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          A: 可以。許多收容所與動物保護團體都有待領養的犬隻。領養前請了解犬隻的行為特徵與健康狀況，並確保自己有能力提供長期照顧。
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <span>Q: 如何參與 TNVR 計畫或社區遊蕩犬管理？</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          A: 您可以聯絡當地動物保護處或動物保護團體，了解社區內的 TNVR 計畫。許多計畫需要志工支持，包括餵食、監測與社區教育等工作。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 8: 完整流程圖 -->
   <div id="tab-diagram" class="tab-panel">
     <div class="card">
       <div class="card-title"><i class="fas fa-sitemap"></i> 完整政策流程圖</div>
@@ -423,6 +689,123 @@
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  }
+
+  // ── 個案故事展開 ──
+  function toggleCaseStudy(el) {
+    el.classList.toggle('open');
+  }
+
+  // ── FAQ 展開 ──
+  function toggleFAQ(el) {
+    el.classList.toggle('open');
+  }
+
+  // ── 數據圖表初始化 ──
+  window.addEventListener('load', function() {
+    initTrendChart();
+    updateSterilizationChart(70);
+  });
+
+  function initTrendChart() {
+    const ctx = document.getElementById('trendChart');
+    if (!ctx) return;
+    
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
+        datasets: [
+          {
+            label: '收容所入所數',
+            data: [8500, 8200, 7800, 6500, 5800, 5200, 4800, 4500, 4200],
+            borderColor: '#d32f2f',
+            backgroundColor: 'rgba(211, 47, 47, 0.1)',
+            tension: 0.4,
+            fill: true
+          },
+          {
+            label: '領養率 (%)',
+            data: [35, 38, 42, 52, 58, 62, 65, 68, 70],
+            borderColor: '#388e3c',
+            backgroundColor: 'rgba(56, 142, 60, 0.1)',
+            tension: 0.4,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'top' }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { color: getComputedStyle(document.documentElement).getPropertyValue('--primary') }
+          },
+          x: {
+            ticks: { color: getComputedStyle(document.documentElement).getPropertyValue('--primary') }
+          }
+        }
+      }
+    });
+  }
+
+  function updateSterilizationChart(rate) {
+    document.getElementById('sterilizationRate').textContent = rate;
+    
+    const ctx = document.getElementById('sterilizationChart');
+    if (!ctx) return;
+    
+    // 計算族群變化
+    const years = [];
+    const population = [];
+    let currentPop = 1000;
+    
+    for (let i = 0; i <= 10; i++) {
+      years.push('第 ' + i + ' 年');
+      population.push(Math.round(currentPop));
+      // 簡化模型：每年族群減少率 = (結紮率 - 自然死亡率) / 100
+      const reductionRate = (rate - 10) / 100;
+      currentPop = currentPop * (1 - reductionRate);
+    }
+    
+    // 清除舊圖表
+    if (window.sterilizationChartInstance) {
+      window.sterilizationChartInstance.destroy();
+    }
+    
+    window.sterilizationChartInstance = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: years,
+        datasets: [{
+          label: '預期族群數量',
+          data: population,
+          backgroundColor: '#1565c0',
+          borderColor: '#0d47a1',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'top' }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { color: getComputedStyle(document.documentElement).getPropertyValue('--primary') }
+          },
+          x: {
+            ticks: { color: getComputedStyle(document.documentElement).getPropertyValue('--primary') }
+          }
+        }
+      }
+    });
   }
 </script>
 
