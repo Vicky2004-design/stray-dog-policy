@@ -880,9 +880,14 @@
     </div>
 
     <div class="card">
-      <div class="card-title"><i class="fas fa-image"></i> 靜態流程圖（可下載）</div>
+      <div class="card-title"><i class="fas fa-image"></i> 静態流程圖（可下載）</div>
       <div class="card-sub">高解析度流程圖，適合列印或簡報使用</div>
-      <img src="flowchart_v3.png" alt="遊蕩犬管理政策流程圖" style="width:100%;max-width:700px;display:block;margin:0 auto;border-radius:10px;border:1px solid var(--border);" />
+      <img src="flowchart_v3.png" alt="遊蕩犬管理步驟流程圖" style="width:100%;max-width:700px;display:block;margin:20px auto;border-radius:10px;border:1px solid var(--border);" />
+      <div style="text-align:center;margin-top:20px;">
+        <button onclick="downloadFlowchart()" style="background:linear-gradient(135deg, #1a1a1a 0%, #333 100%);color:#fff;border:none;padding:12px 28px;border-radius:999px;cursor:pointer;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.24s ease;" onmouseover="this.style.background='linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)';this.style.transform='translateY(-2px)';" onmouseout="this.style.background='linear-gradient(135deg, #1a1a1a 0%, #333 100%)';this.style.transform='translateY(0)';">
+          <i class="fas fa-download"></i> 下載 PNG
+        </button>
+      </div>
     </div>
   </div>
 
@@ -895,6 +900,16 @@
 <script>
   // ── 返回函數 ──
   // 使用 history.back() 以支持 Wix 內嵌網頁的返回功能
+
+  // ── 下載函數 ──
+  function downloadFlowchart() {
+    const link = document.createElement('a');
+    link.href = 'flowchart_v3.png';
+    link.download = 'Taiwan_Stray_Dog_Policy_Flowchart.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 
   // ── Tab 切換 ──
   function switchTab(name) {
