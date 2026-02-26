@@ -896,11 +896,11 @@
   // ── Wix 跳轉函數 ──
   function navigateToWixPolicy() {
     const baseUrl = 'https://wujei50191.wixsite.com/ccucom';
-    const targetHash = '#%E6%94%BF%E7%AD%96';
+    const targetHash = '#section66';
     window.location.href = baseUrl + targetHash;
     setTimeout(function() {
       try {
-        let element = document.querySelector('[data-anchor="政策"]') || document.querySelector('[id*="政策"]') || document.querySelector('[data-anchor="%E6%94%BF%E7%AD%96"]') || document.querySelector('[id*="%E6%94%BF%E7%AD%96"]');
+        let element = document.getElementById('section66') || document.querySelector('[data-anchor="section66"]');
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
