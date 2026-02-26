@@ -120,14 +120,17 @@
     /* ── TNVR Flip Card ── */
     .tnvr-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 24px;
       margin-top: 24px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
     }
     
     .tnvr-flip-container {
       perspective: 1000px;
-      height: 280px;
+      aspect-ratio: 1 / 1;
       cursor: pointer;
     }
     
@@ -206,6 +209,7 @@
       
       .tnvr-grid {
         grid-template-columns: 1fr;
+        max-width: 100%;
       }
       
       .header-controls {
@@ -223,7 +227,7 @@
     <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i> 深色</button>
     <button class="return-btn" onclick="history.back()"><i class="fas fa-arrow-left"></i> 返回</button>
   </div>
-  <h1><i class="fas fa-heart"></i> TNVR 四步驟</h1>
+  <h1>TNVR 四步驟</h1>
   <p>Trap-Neuter-Vaccinate-Return 人道管理機制<br>點擊下方卡片翻轉查看詳細說明</p>
 </header>
 
