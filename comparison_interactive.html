@@ -194,6 +194,68 @@
       border-radius: 2px;
     }
 
+    /* ── Quantification Explanation ── */
+    .quantification-section {
+      background: rgba(0,0,0,0.02);
+      border: 1px solid var(--border);
+      padding: 30px;
+      margin-top: 40px;
+      border-radius: 0px;
+    }
+
+    body.dark-mode .quantification-section {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .quantification-section h3 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .quantification-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    .quantification-table th {
+      background: var(--primary);
+      color: var(--bg);
+      padding: 15px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    body.dark-mode .quantification-table th {
+      background: #333333;
+      color: #eeeeee;
+    }
+
+    .quantification-table td {
+      padding: 15px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    .quantification-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .score-cell {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .indicator-cell {
+      color: var(--secondary);
+      line-height: 1.6;
+    }
+
     /* ── Data Explanation ── */
     .data-explanation {
       background: rgba(0,0,0,0.03);
@@ -305,6 +367,8 @@
       .chart-wrapper { height: 400px; }
       .radar-controls { flex-direction: column; align-items: flex-start; }
       .checkbox-group { flex-direction: column; gap: 10px; }
+      .quantification-table { font-size: 0.85rem; }
+      .quantification-table th, .quantification-table td { padding: 10px; }
     }
   </style>
 </head>
@@ -316,7 +380,7 @@
     <button class="btn" onclick="toggleTheme()" id="theme-btn"><i class="fas fa-moon"></i> 深色模式</button>
   </div>
   <h1>多維度政策雷達圖分析</h1>
-  <p>透過量化評分，從五大維度對比全球遊蕩犬管理政策的優劣與特色</p>
+  <p>透過量化評分與科學指標，從五大維度對比全球遊蕩犬管理政策的優劣與特色</p>
 </header>
 
 <main>
@@ -355,15 +419,127 @@
 
       <div class="chart-legend" id="chartLegend"></div>
 
-      <div class="data-explanation">
-        <h4><i class="fas fa-info-circle"></i> 評分維度說明</h4>
-        <ul>
-          <li><strong>源頭管控 (0-10)：</strong> 從飼主登記、強制晶片到法律約束的完整度。</li>
-          <li><strong>結紮效率 (0-10)：</strong> 遊蕩犬絕育計畫的覆蓋率與執行成效。</li>
-          <li><strong>飼主責任 (0-10)：</strong> 法律對飼主責任的明確定義與懲罰力度。</li>
-          <li><strong>法律嚴謹度 (0-10)：</strong> 動物保護法規的完整性與違規罰金的嚇阻力。</li>
-          <li><strong>社會支持度 (0-10)：</strong> 公眾教育、志工參與與社會共識的強度。</li>
-        </ul>
+      <!-- Quantification Explanation Table -->
+      <div class="quantification-section">
+        <h3><i class="fas fa-database"></i> 評分指標說明與量化依據</h3>
+        <p style="margin-bottom: 20px; color: var(--secondary);">以下表格詳細說明每個維度的評分標準與各國的實際政策指標。評分基於官方法規、公開統計數據與國際研究報告。</p>
+        
+        <table class="quantification-table">
+          <thead>
+            <tr>
+              <th style="width: 20%;">評分維度</th>
+              <th style="width: 15%;">分數範圍</th>
+              <th style="width: 65%;">量化指標與政策依據</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 源頭管控 -->
+            <tr>
+              <td rowspan="4" class="score-cell">源頭管控<br>(0-10)</td>
+              <td class="score-cell">9-10</td>
+              <td class="indicator-cell"><strong>德國</strong>：強制全國晶片登記制、高額養狗稅、棄養罰金 2.5-2.5 萬歐元、違法飼養罰款可達 5 萬歐元。</td>
+            </tr>
+            <tr>
+              <td class="score-cell">7-8</td>
+              <td class="indicator-cell"><strong>荷蘭</strong>：強制登記、差異化養狗稅、高額罰款（棄養罰金 1.5 萬歐元以上）、社會文化高度支持。</td>
+            </tr>
+            <tr>
+              <td class="score-cell">6-7</td>
+              <td class="indicator-cell"><strong>新加坡</strong>：登記制度完善、政府與民間合作、但執行力度不如德國嚴格、罰金相對較低。</td>
+            </tr>
+            <tr>
+              <td class="score-cell">3-5</td>
+              <td class="indicator-cell"><strong>臺灣</strong>：雖有登記制度但執行率不一、棄養罰則最高 1.5 萬台幣（約 500 歐元）、實際裁罰案件比例低、源頭管控力度不足。</td>
+            </tr>
+
+            <!-- 結紮效率 -->
+            <tr>
+              <td rowspan="4" class="score-cell">結紮效率<br>(0-10)</td>
+              <td class="score-cell">8-10</td>
+              <td class="indicator-cell"><strong>荷蘭、德國</strong>：遊蕩犬絕育率 95% 以上、官方與民間組織配合、系統化管理。</td>
+            </tr>
+            <tr>
+              <td class="score-cell">7-8</td>
+              <td class="indicator-cell"><strong>新加坡</strong>：TNRM 制度化管理、達成 80% 以上遊蕩犬絕育率、持續推進中。</td>
+            </tr>
+            <tr>
+              <td class="score-cell">4-6</td>
+              <td class="indicator-cell"><strong>臺灣</strong>：絕育計畫推行中但覆蓋率有限、民間組織參與度不均、棄養問題導致新增遊蕩犬速度超過絕育速度。</td>
+            </tr>
+            <tr>
+              <td class="score-cell">-</td>
+              <td class="indicator-cell">-</td>
+            </tr>
+
+            <!-- 飼主責任 -->
+            <tr>
+              <td rowspan="4" class="score-cell">飼主責任<br>(0-10)</td>
+              <td class="score-cell">8-10</td>
+              <td class="indicator-cell"><strong>德國、荷蘭</strong>：法律明確定義飼主義務、虐待或棄養可處監禁、社會文化強化責任意識。</td>
+            </tr>
+            <tr>
+              <td class="score-cell">6-7</td>
+              <td class="indicator-cell"><strong>新加坡</strong>：飼主責任法規完善、但執行力度略低、社區教育持續進行。</td>
+            </tr>
+            <tr>
+              <td class="score-cell">3-5</td>
+              <td class="indicator-cell"><strong>臺灣</strong>：雖有動物保護法但飼主責任條款執行不力、棄養行為未受有效遏止、社會責任意識仍需加強。</td>
+            </tr>
+            <tr>
+              <td class="score-cell">-</td>
+              <td class="indicator-cell">-</td>
+            </tr>
+
+            <!-- 法律嚴謹度 -->
+            <tr>
+              <td rowspan="4" class="score-cell">法律嚴謹度<br>(0-10)</td>
+              <td class="score-cell">9-10</td>
+              <td class="indicator-cell"><strong>德國</strong>：動物保護法完整、違規罰金高達 5 萬歐元、可處監禁、執法力度強。</td>
+            </tr>
+            <tr>
+              <td class="score-cell">8</td>
+              <td class="indicator-cell"><strong>荷蘭</strong>：法規嚴謹、罰金 1.5 萬歐元以上、可處監禁、執法一致。</td>
+            </tr>
+            <tr>
+              <td class="score-cell">6-7</td>
+              <td class="indicator-cell"><strong>新加坡</strong>：法規完善但罰金相對較低、執法力度中等。</td>
+            </tr>
+            <tr>
+              <td class="score-cell">3-5</td>
+              <td class="indicator-cell"><strong>臺灣</strong>：動物保護法存在但罰金上限 1.5 萬台幣、實際裁罰案件少、法律嚴謹度不足。</td>
+            </tr>
+
+            <!-- 社會支持度 -->
+            <tr>
+              <td rowspan="4" class="score-cell">社會支持度<br>(0-10)</td>
+              <td class="score-cell">8-10</td>
+              <td class="indicator-cell"><strong>德國、荷蘭</strong>：社會文化高度重視動物福利、志工參與度高、公眾教育完善。</td>
+            </tr>
+            <tr>
+              <td class="score-cell">7-8</td>
+              <td class="indicator-cell"><strong>新加坡</strong>：政府與民間組織深度合作、社區志工積極參與、公眾教育持續推進。</td>
+            </tr>
+            <tr>
+              <td class="score-cell">4-6</td>
+              <td class="indicator-cell"><strong>臺灣</strong>：民間組織與志工參與度高但資源分散、不當餵食問題嚴重、公眾教育成效有限。</td>
+            </tr>
+            <tr>
+              <td class="score-cell">-</td>
+              <td class="indicator-cell">-</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="data-explanation">
+          <h4><i class="fas fa-info-circle"></i> 資料來源與評分說明</h4>
+          <ul>
+            <li><strong>德國數據</strong>：德國動物保護法 (Tierschutzgesetz)、各州法規、歐盟動物福利標準。</li>
+            <li><strong>荷蘭數據</strong>：荷蘭 2019 年零流浪犬達成報告、動物福利法規。</li>
+            <li><strong>新加坡數據</strong>：新加坡動物與獸醫局 (AVA) 官方統計、TNRM 計畫成效報告。</li>
+            <li><strong>臺灣數據</strong>：動物保護法、各縣市動物防疫處統計、零撲殺政策評估報告。</li>
+            <li><strong>評分方法</strong>：綜合法律完整性、執法力度、社會支持度與實際成效進行 0-10 分評分。</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -468,35 +644,43 @@
 </footer>
 
 <script>
-  // Policy data for radar chart
+  // Policy data for radar chart with enhanced colors
   const policyData = {
     '新加坡': {
       label: '新加坡 (TNRM)',
       data: [7, 8, 6, 7, 8],
-      borderColor: '#1a1a1a',
-      backgroundColor: 'rgba(26, 26, 26, 0.1)',
-      borderWidth: 2
+      borderColor: '#FF6B6B',
+      backgroundColor: 'rgba(255, 107, 107, 0.15)',
+      borderWidth: 3,
+      pointRadius: 5,
+      pointHoverRadius: 7
     },
     '德國': {
       label: '德國 (源頭管控)',
       data: [9, 7, 9, 9, 7],
-      borderColor: '#555555',
-      backgroundColor: 'rgba(85, 85, 85, 0.1)',
-      borderWidth: 2
+      borderColor: '#1a1a1a',
+      backgroundColor: 'rgba(26, 26, 26, 0.15)',
+      borderWidth: 3,
+      pointRadius: 5,
+      pointHoverRadius: 7
     },
     '荷蘭': {
       label: '荷蘭 (多管齊下)',
       data: [8, 8, 8, 8, 8],
-      borderColor: '#888888',
-      backgroundColor: 'rgba(136, 136, 136, 0.1)',
-      borderWidth: 2
+      borderColor: '#4ECDC4',
+      backgroundColor: 'rgba(78, 205, 196, 0.15)',
+      borderWidth: 3,
+      pointRadius: 5,
+      pointHoverRadius: 7
     },
     '臺灣': {
       label: '臺灣 (零撲殺)',
       data: [4, 5, 4, 4, 5],
-      borderColor: '#cccccc',
-      backgroundColor: 'rgba(204, 204, 204, 0.1)',
-      borderWidth: 2
+      borderColor: '#FFB347',
+      backgroundColor: 'rgba(255, 179, 71, 0.15)',
+      borderWidth: 3,
+      pointRadius: 5,
+      pointHoverRadius: 7
     }
   };
 
