@@ -114,15 +114,18 @@
       background: var(--bg);
       align-items: center;
       overflow-x: auto;
+      position: relative;
     }
     
     .tab-bar .return-btn {
-      margin-left: auto;
+      position: absolute;
+      right: 20px;
+      top: 32px;
     }
     
     @media (max-width: 768px) {
       .tab-bar .return-btn {
-        margin-left: 0;
+        position: static;
         margin-top: 10px;
         width: 100%;
       }
@@ -305,18 +308,18 @@
 
 <!-- Tab Navigation -->
 <div class="tab-bar">
-  <button class="tab-btn active" onclick="switchTab('overview')"><i class="fas fa-chart-bar"></i> 政策概覽</button>
+  <button class="tab-btn" onclick="switchTab('overview')"><i class="fas fa-chart-bar"></i> 政策概覽</button>
   <button class="tab-btn" onclick="switchTab('before')"><i class="fas fa-times-circle"></i> 零撲殺前</button>
   <button class="tab-btn" onclick="switchTab('after')"><i class="fas fa-check-circle"></i> 零撲殺後</button>
   <button class="tab-btn" onclick="switchTab('tnvr')"><i class="fas fa-heart"></i> TNVR 詳解</button>
-  <button class="tab-btn" onclick="switchTab('diagram')"><i class="fas fa-sitemap"></i> 完整流程圖</button>
+  <button class="tab-btn active" onclick="switchTab('diagram')"><i class="fas fa-sitemap"></i> 完整流程圖</button>
   <button class="tab-btn return-btn" style="background: linear-gradient(135deg, #1a1a1a 0%, #333 100%); color: #fff; border-color: #1a1a1a; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; transition: all 0.24s ease; cursor: pointer;" onmouseover="this.style.background='linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='linear-gradient(135deg, #1a1a1a 0%, #333 100%)'; this.style.transform='translateY(0)';" onclick="history.back();" title="返回上一頁"><i class="fas fa-arrow-left"></i> 返回</button>
 </div>
 
 <main>
 
   <!-- TAB 1: 政策概覽 -->
-  <div id="tab-overview" class="tab-panel active">
+  <div id="tab-overview" class="tab-panel">
     <div class="card">
       <div class="card-title"><i class="fas fa-chart-bar"></i> 政策概覽</div>
       <div class="card-sub">台灣遊蕩犬管理政策的核心要點</div>
@@ -521,7 +524,7 @@
   </div>
 
   <!-- TAB 5: 完整流程圖 -->
-  <div id="tab-diagram" class="tab-panel">
+  <div id="tab-diagram" class="tab-panel active">
     <div class="card">
       <div class="card-title"><i class="fas fa-sitemap"></i> 完整政策流程圖</div>
       <div class="card-sub">零撲殺前後完整決策流程一覽（可點擊放大）</div>
