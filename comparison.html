@@ -58,7 +58,7 @@
       gap: 12px;
     }
     
-    .theme-toggle {
+    .theme-toggle, .return-btn {
       background: rgba(255,255,255,0.15);
       border: 1px solid rgba(255,255,255,0.25);
       color: #fff;
@@ -70,7 +70,7 @@
       font-family: 'Noto Sans TC', sans-serif;
     }
     
-    .theme-toggle:hover {
+    .theme-toggle:hover, .return-btn:hover {
       background: rgba(255,255,255,0.25);
       transform: translateY(-2px);
     }
@@ -287,6 +287,7 @@
 
 <header>
   <div class="header-controls">
+    <button class="return-btn" onclick="history.back()" title="返回上一頁"><i class="fas fa-arrow-left"></i></button>
     <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn"><i class="fas fa-moon"></i></button>
   </div>
   <div class="badge">國際政策對比</div>
