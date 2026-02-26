@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>收容與分流：管理的第一線</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #ffffff;
+      --card: #ffffff;
+      --primary: #1a1a1a;
+      --secondary: #444444;
+      --muted: #888888;
+      --border: #dddddd;
+      --accent: #000000;
+      --shadow: 0 4px 20px rgba(0,0,0,0.05);
+      --highlight-yellow: #FFF3CD;
+      --highlight-blue: #E7F3FF;
+      --highlight-red: #FFE7E7;
+      --highlight-green: #E7F5E7;
+    }
+    
+    /* ── Dark Mode ── */
+    body.dark-mode {
+      --bg: #121212;
+      --card: #1e1e1e;
+      --primary: #eeeeee;
+      --secondary: #cccccc;
+      --muted: #888888;
+      --border: #333333;
+      --accent: #ffffff;
+      --shadow: 0 4px 20px rgba(0,0,0,0.3);
+      --highlight-yellow: #4a4a1a;
+      --highlight-blue: #1a3a4a;
+      --highlight-red: #4a1a1a;
+      --highlight-green: #1a4a1a;
+    }
+    
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--bg);
+      color: var(--primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 60px 24px 40px;
+      text-align: center;
+      position: relative;
+    }
+    
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    
+    header p {
+      font-size: 1.1rem;
+      color: var(--secondary);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .header-controls {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      display: flex;
+      gap: 15px;
+    }
+    
+    .btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--primary);
+      padding: 8px 16px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .btn:hover {
+      background: var(--primary);
+      color: var(--bg);
+      border-color: var(--primary);
+    }
+
+    /* ── Main Content ── */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    /* ── Section Title ── */
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      font-weight: 700;
+      text-align: left;
+      border-left: 4px solid var(--accent);
+      padding-left: 15px;
+    }
+
+    /* ── Flow Diagram Section ── */
+    .flow-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 40px;
+      margin-bottom: 60px;
+      box-shadow: var(--shadow);
+    }
+
+    .flow-diagram {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 30px;
+      align-items: center;
+      margin: 40px 0;
+    }
+
+    .flow-box {
+      background: var(--card);
+      border: 2px solid var(--border);
+      padding: 25px;
+      text-align: center;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .flow-box:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+      transform: translateY(-5px);
+    }
+
+    .flow-box.highlight-yellow {
+      background: var(--highlight-yellow);
+      border-color: #FFD700;
+    }
+
+    body.dark-mode .flow-box.highlight-yellow {
+      background: rgba(255, 215, 0, 0.1);
+    }
+
+    .flow-box.highlight-blue {
+      background: var(--highlight-blue);
+      border-color: #4A90E2;
+    }
+
+    body.dark-mode .flow-box.highlight-blue {
+      background: rgba(74, 144, 226, 0.1);
+    }
+
+    .flow-box.highlight-red {
+      background: var(--highlight-red);
+      border-color: #E74C3C;
+    }
+
+    body.dark-mode .flow-box.highlight-red {
+      background: rgba(231, 76, 60, 0.1);
+    }
+
+    .flow-box.highlight-green {
+      background: var(--highlight-green);
+      border-color: #27AE60;
+    }
+
+    body.dark-mode .flow-box.highlight-green {
+      background: rgba(39, 174, 96, 0.1);
+    }
+
+    .flow-box-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--primary);
+    }
+
+    .flow-box-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .flow-arrow {
+      font-size: 2rem;
+      color: var(--secondary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ── Comparison Grid ── */
+    .comparison-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin: 40px 0;
+    }
+
+    .comparison-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      padding: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .comparison-card.general {
+      border-color: #FFD700;
+      background: var(--highlight-yellow);
+    }
+
+    body.dark-mode .comparison-card.general {
+      background: rgba(255, 215, 0, 0.05);
+    }
+
+    .comparison-card.risk {
+      border-color: #E74C3C;
+      background: var(--highlight-red);
+    }
+
+    body.dark-mode .comparison-card.risk {
+      background: rgba(231, 76, 60, 0.05);
+    }
+
+    .comparison-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-5px);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .card-subtitle {
+      font-size: 0.9rem;
+      color: var(--secondary);
+      margin-top: 5px;
+    }
+
+    .card-content {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--secondary);
+    }
+
+    .card-list {
+      list-style: none;
+      margin: 15px 0;
+    }
+
+    .card-list li {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .card-list li::before {
+      content: "→";
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── Highlight Box ── */
+    .highlight-box {
+      background: rgba(0, 0, 0, 0.03);
+      border-left: 4px solid var(--accent);
+      padding: 20px;
+      margin: 25px 0;
+      border-radius: 0px;
+    }
+
+    body.dark-mode .highlight-box {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .highlight-box.warning {
+      border-left-color: #E74C3C;
+      background: rgba(231, 76, 60, 0.05);
+    }
+
+    .highlight-box.success {
+      border-left-color: #27AE60;
+      background: rgba(39, 174, 96, 0.05);
+    }
+
+    .highlight-box.info {
+      border-left-color: #4A90E2;
+      background: rgba(74, 144, 226, 0.05);
+    }
+
+    .highlight-box h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary);
+    }
+
+    .highlight-box p {
+      font-size: 0.95rem;
+      color: var(--secondary);
+      line-height: 1.7;
+    }
+
+    /* ── Risk Scenarios ── */
+    .scenarios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin: 40px 0;
+    }
+
+    .scenario-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      padding: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .scenario-card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+
+    .scenario-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .scenario-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--primary);
+    }
+
+    .scenario-description {
+      font-size: 0.9rem;
+      color: var(--secondary);
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .scenario-outcome {
+      background: var(--highlight-red);
+      padding: 12px;
+      border-left: 3px solid #E74C3C;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    body.dark-mode .scenario-outcome {
+      background: rgba(231, 76, 60, 0.1);
+    }
+
+    /* ── Statistics Section ── */
+    .stats-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 40px;
+      margin: 60px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      color: var(--secondary);
+      font-weight: 600;
+    }
+
+    .stat-description {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    /* ── Key Takeaway ── */
+    .key-takeaway {
+      background: linear-gradient(135deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.02) 100%);
+      border: 2px solid var(--accent);
+      padding: 30px;
+      margin: 60px 0;
+      border-radius: 0px;
+    }
+
+    body.dark-mode .key-takeaway {
+      background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+    }
+
+    .key-takeaway h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary);
+    }
+
+    .key-takeaway p {
+      font-size: 1rem;
+      color: var(--secondary);
+      line-height: 1.8;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 60px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      header { padding: 80px 20px 40px; }
+      header h1 { font-size: 2rem; }
+      .header-controls { top: 20px; right: 20px; left: 20px; justify-content: space-between; }
+      main { padding: 40px 20px; }
+      .section-title { font-size: 1.5rem; }
+      .flow-section { padding: 20px; }
+      .flow-diagram { grid-template-columns: 1fr; gap: 15px; }
+      .flow-arrow { transform: rotate(90deg); }
+      .comparison-container { grid-template-columns: 1fr; }
+      .scenarios-grid { grid-template-columns: 1fr; }
+      .stats-section { grid-template-columns: 1fr; gap: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-controls">
+    <button class="btn" onclick="history.back()"><i class="fas fa-arrow-left"></i> 返回</button>
+    <button class="btn" onclick="toggleTheme()" id="theme-btn"><i class="fas fa-moon"></i> 深色模式</button>
+  </div>
+  <h1>收容與分流：管理的第一線</h1>
+  <p>深入了解台灣遊蕩犬進入防治所後的評估、分流與管理機制</p>
+</header>
+
+<main>
+  <!-- Introduction Section -->
+  <section>
+    <h2 class="section-title"><i class="fas fa-info-circle"></i> 進園區的犬隻來源</h2>
+    
+    <div class="flow-section">
+      <p style="font-size: 1rem; color: var(--secondary); margin-bottom: 30px;">
+        進入園區的浪犬來源主要來自兩種情況：民眾自行將犬隻帶往防治所，或地方通報後由人員前往捕捉。然而，看似簡單的「捕捉」背後，其實存在關鍵的<span style="background: var(--highlight-yellow); padding: 4px 8px; font-weight: 600;">分流機制</span>。
+      </p>
+
+      <div class="flow-diagram">
+        <div class="flow-box highlight-yellow">
+          <div class="flow-box-icon"><i class="fas fa-phone"></i></div>
+          <div class="flow-box-title">民眾通報</div>
+          <p style="font-size: 0.9rem; color: var(--secondary);">發現流浪犬或自行帶往防治所</p>
+        </div>
+        <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="flow-box highlight-blue">
+          <div class="flow-box-icon"><i class="fas fa-clipboard-check"></i></div>
+          <div class="flow-box-title">初步評估</div>
+          <p style="font-size: 0.9rem; color: var(--secondary);">判斷犬隻行為與風險等級</p>
+        </div>
+      </div>
+
+      <div class="highlight-box info">
+        <h4><i class="fas fa-lightbulb"></i> 關鍵分流點</h4>
+        <p>地方通報的內容大致可分為兩類：一種是<strong>單純希望移除鄰里間出沒的流浪犬</strong>；另一種則涉及<strong>咬人、追車、攻擊雞鴨牛豬等牲畜，或闖入生態敏感區</strong>，對保育動物可能造成威脅。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Section -->
+  <section>
+    <h2 class="section-title"><i class="fas fa-code-branch"></i> 兩大分流路徑</h2>
+    
+    <div class="comparison-container">
+      <!-- General Notification -->
+      <div class="comparison-card general">
+        <div class="card-header">
+          <div class="card-icon"><i class="fas fa-home"></i></div>
+          <div>
+            <div class="card-title">一般通報</div>
+            <div class="card-subtitle">鄰里移除型</div>
+          </div>
+        </div>
+        <div class="card-content">
+          <p style="margin-bottom: 15px;">民眾單純希望移除鄰里間出沒的流浪犬，犬隻行為未涉及攻擊或威脅。</p>
+          <ul class="card-list">
+            <li>進入 <strong>TNVR 程序</strong></li>
+            <li>進行結紮手術</li>
+            <li>疫苗接種與晶片植入</li>
+            <li><strong style="color: #27AE60;">回放原地</strong>進行長期管理</li>
+          </ul>
+          <div class="highlight-box success" style="margin-top: 15px;">
+            <h4><i class="fas fa-check-circle"></i> 管理目標</h4>
+            <p>透過結紮控制族群成長，同時保留犬隻在原棲息地的生活。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Risk Notification -->
+      <div class="comparison-card risk">
+        <div class="card-header">
+          <div class="card-icon"><i class="fas fa-exclamation-circle"></i></div>
+          <div>
+            <div class="card-title">高風險通報</div>
+            <div class="card-subtitle">精準捕捉型</div>
+          </div>
+        </div>
+        <div class="card-content">
+          <p style="margin-bottom: 15px;">涉及咬人、追車、攻擊牲畜或闖入生態敏感區等具體威脅行為。</p>
+          <ul class="card-list">
+            <li>進行 <strong>精準捕捉</strong></li>
+            <li>行為評估與隔離觀察</li>
+            <li>被視為<strong>具風險個體</strong></li>
+            <li><strong style="color: #E74C3C;">不會回放</strong>，進入長期收容</li>
+          </ul>
+          <div class="highlight-box warning" style="margin-top: 15px;">
+            <h4><i class="fas fa-shield-alt"></i> 管理目標</h4>
+            <p>保護鄰里安寧、農戶生計與生態環境安全。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box info" style="margin-top: 40px;">
+      <h4><i class="fas fa-exclamation-triangle"></i> 精準捕捉的核心差異</h4>
+      <p><strong>精準捕捉</strong>是指針對具體威脅行為的犬隻進行有目標的捕捉，而非籠統的「流浪犬移除」。這種做法基於<strong>風險評估與證據</strong>，而非單純的鄰里投訴。被列為「高風險個體」的犬隻，因其行為已對人類、家畜或生態造成實質威脅，因此不適合回放原地。</p>
+    </div>
+  </section>
+
+  <!-- Risk Scenarios -->
+  <section>
+    <h2 class="section-title"><i class="fas fa-exclamation-triangle"></i> 高風險情境案例</h2>
+    
+    <p style="margin-bottom: 30px; color: var(--secondary); font-size: 1rem;">
+      以下是可能導致犬隻進入「長期收容」而非「TNVR 回放」的具體情境：
+    </p>
+
+    <div class="scenarios-grid">
+      <!-- Biting Incident -->
+      <div class="scenario-card">
+        <div class="scenario-icon"><i class="fas fa-bite"></i></div>
+        <div class="scenario-title">咬傷人類</div>
+        <div class="scenario-description">
+          犬隻曾咬傷或攻擊行人、居民或兒童，造成實際傷害或明確的威脅行為。
+        </div>
+        <div class="scenario-outcome">
+          ⚠️ 進入長期收容 (不回放)
+        </div>
+      </div>
+
+      <!-- Chasing Vehicles -->
+      <div class="scenario-card">
+        <div class="scenario-icon"><i class="fas fa-car"></i></div>
+        <div class="scenario-title">追車行為</div>
+        <div class="scenario-description">
+          犬隻習慣性追逐機車、汽車或自行車，造成交通安全隱患與用路人恐懼。
+        </div>
+        <div class="scenario-outcome">
+          ⚠️ 進入長期收容 (不回放)
+        </div>
+      </div>
+
+      <!-- Livestock Attacks -->
+      <div class="scenario-card">
+        <div class="scenario-icon"><i class="fas fa-cow"></i></div>
+        <div class="scenario-title">攻擊家畜</div>
+        <div class="scenario-description">
+          犬隻攻擊或殺害雞、鴨、牛、豬等農戶飼養的家畜，造成農戶經濟損失。
+        </div>
+        <div class="scenario-outcome">
+          ⚠️ 進入長期收容 (不回放)
+        </div>
+      </div>
+
+      <!-- Ecological Threat -->
+      <div class="scenario-card">
+        <div class="scenario-icon"><i class="fas fa-leaf"></i></div>
+        <div class="scenario-title">威脅保育動物</div>
+        <div class="scenario-description">
+          犬隻闖入生態敏感區（如國家公園、野生動物保護區），威脅瀕危物種或保育類動物的生存。
+        </div>
+        <div class="scenario-outcome">
+          ⚠️ 進入長期收容 (不回放)
+        </div>
+      </div>
+
+      <!-- Aggressive Pack Behavior -->
+      <div class="scenario-card">
+        <div class="scenario-icon"><i class="fas fa-users"></i></div>
+        <div class="scenario-title">群體攻擊行為</div>
+        <div class="scenario-description">
+          多隻犬隻組成犬群，集體追逐、圍攻行人或其他動物，形成明確的安全威脅。
+        </div>
+        <div class="scenario-outcome">
+          ⚠️ 進入長期收容 (不回放)
+        </div>
+      </div>
+
+      <!-- Repeat Offender -->
+      <div class="scenario-card">
+        <div class="scenario-icon"><i class="fas fa-redo"></i></div>
+        <div class="scenario-title">慣犯個體</div>
+        <div class="scenario-description">
+          犬隻曾因不當行為被捕捉或通報多次，顯示其行為問題具有持續性與難以改善的特徵。
+        </div>
+        <div class="scenario-outcome">
+          ⚠️ 進入長期收容 (不回放)
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box warning" style="margin-top: 40px;">
+      <h4><i class="fas fa-balance-scale"></i> 權衡的困難</h4>
+      <p>
+        防治所面臨的核心挑戰在於如何在<strong>「鄰里安寧」、「農戶生計」與「生態保護」</strong>之間取得平衡。
+        長期收容的決策並非簡單的「移除」，而是基於<strong>風險評估與公共安全考量</strong>的必要措施。
+        同時，這也凸顯了<strong>源頭管控（飼主責任）與不當餵食防止</strong>的重要性——減少流浪犬數量與風險個體的產生，才是根本之道。
+      </p>
+    </div>
+  </section>
+
+  <!-- Key Takeaway -->
+  <section>
+    <div class="key-takeaway">
+      <h3><i class="fas fa-key"></i> 核心要點</h3>
+      <p>
+        台灣的遊蕩犬管理並非「一刀切」的政策，而是基於<strong>科學評估與風險分類</strong>的精準管理。
+        <strong>TNVR 回放</strong>適用於行為良好的一般流浪犬，透過結紮控制族群；
+        而<strong>長期收容</strong>則針對具體威脅行為的個體，保護公眾安全與生態環境。
+        這種分流機制的有效運作，關鍵在於<strong>民眾的正確通報、防治所的專業評估，以及社會對「精準管理」的理解與支持</strong>。
+      </p>
+    </div>
+  </section>
+
+  <!-- Statistics Section -->
+  <section>
+    <h2 class="section-title"><i class="fas fa-chart-bar"></i> 管理現況</h2>
+    
+    <div class="stats-section">
+      <div class="stat-item">
+        <div class="stat-number">141,584</div>
+        <div class="stat-label">全國遊蕩犬推估數量</div>
+        <div class="stat-description">2024 年農業部調查，較 2022 年減少 11.34%</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">-11.34%</div>
+        <div class="stat-label">遊蕩犬數量變化</div>
+        <div class="stat-description">2018 年以來首次下降，顯示管理成效初現</div>
+      </div>
+    </div>
+
+    <div class="highlight-box info" style="margin-top: 40px;">
+      <h4><i class="fas fa-info-circle"></i> 數據解讀</h4>
+      <p>
+        儘管遊蕩犬數量開始下降，但這並不意味著問題已解決。
+        <strong>TNVR 的持續推行、飼主責任的強化、以及不當餵食的防止</strong>，仍是未來管理的三大重點。
+        同時，<strong>精準捕捉與長期收容的必要性</strong>應被視為保護公眾與生態的必要手段，而非簡單的「撲殺」政策。
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2026 台灣遊蕩犬管理研究專案. All rights reserved.</p>
+</footer>
+
+<script>
+  function toggleTheme() {
+    const isDark = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    updateThemeBtn(isDark);
+  }
+  
+  function updateThemeBtn(isDark) {
+    const btn = document.getElementById('theme-btn');
+    btn.innerHTML = isDark ? '<i class="fas fa-sun"></i> 淺色模式' : '<i class="fas fa-moon"></i> 深色模式';
+  }
+  
+  // Load saved theme preference
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    updateThemeBtn(true);
+  }
+</script>
+
+</body>
+</html>
