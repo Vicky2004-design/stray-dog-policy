@@ -1,629 +1,586 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>最後的機會 - 互動式遊戲</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-  <style>
-    /* ── Reset & Base ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #0a0a0a;
-      --card: #1a1a1a;
-      --primary: #f5f5f5;
-      --secondary: #b0b0b0;
-      --muted: #808080;
-      --border: #333333;
-      --shadow: 0 4px 20px rgba(0,0,0,0.5);
-      --radius: 12px;
-    }
-    
-    body {
-      font-family: 'Noto Sans TC', sans-serif;
-      background: var(--bg);
-      color: var(--primary);
-      min-height: 100vh;
-      line-height: 1.6;
-      transition: all 0.3s ease;
-      overflow-x: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最後的機會 - 遊蕩犬議題互動遊戲</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* ── Animated Background ── */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.03) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 80%, rgba(255,255,255,0.02) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: 0;
-      animation: breathe 8s ease-in-out infinite;
-    }
+        body {
+            font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
 
-    @keyframes breathe {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.6; }
-    }
+        .game-container {
+            width: 100%;
+            max-width: 900px;
+            background: rgba(26, 26, 26, 0.95);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: slideIn 0.6s ease-out;
+        }
 
-    /* ── Game Container ── */
-    .game-container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: relative;
-      z-index: 1;
-    }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    /* ── Header ── */
-    .game-header {
-      text-align: center;
-      margin-bottom: 40px;
-      position: relative;
-      animation: slideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .return-btn {
-      position: absolute;
-      top: 0;
-      left: 0;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: all 0.24s cubic-bezier(0.34, 1.56, 0.64, 1);
-      font-family: 'Noto Sans TC', sans-serif;
-    }
-    
-    .return-btn:hover {
-      background: rgba(255,255,255,0.2);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-    }
-    
-    .game-header h1 {
-      font-size: 2.4rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
-      animation: fadeInScale 1s ease-out 0.2s both;
-    }
-    
-    @keyframes fadeInScale {
-      from {
-        opacity: 0;
-        transform: scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-    
-    .game-header p {
-      font-size: 1rem;
-      opacity: 0.8;
-      max-width: 600px;
-      margin: 0 auto;
-      animation: fadeIn 1s ease-out 0.4s both;
-    }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
 
-    /* ── Scene Container ── */
-    .scene {
-      display: none;
-      animation: sceneEnter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    
-    .scene.active {
-      display: block;
-    }
-    
-    @keyframes sceneEnter {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        .controls {
+            display: flex;
+            gap: 15px;
+        }
 
-    /* ── Scene Content ── */
-    .scene-content {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 40px;
-      margin-bottom: 30px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .scene-content::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    }
-    
-    .scene-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: #f5f5f5;
-      min-height: 2.2em;
-    }
-    
-    .scene-description {
-      font-size: 1.05rem;
-      line-height: 1.8;
-      color: var(--secondary);
-      margin-bottom: 24px;
-      white-space: pre-wrap;
-      min-height: 100px;
-    }
-    
-    .scene-image {
-      width: 100%;
-      height: 300px;
-      background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-      border-radius: 8px;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-      color: #444;
-      animation: imageFloat 3s ease-in-out infinite;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    @keyframes imageFloat {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-    
-    .scene-image::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 50%);
-      pointer-events: none;
-    }
+        .btn-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #555;
+            color: #f5f5f5;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
 
-    /* ── Choices Container ── */
-    .choices-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 16px;
-      margin-top: 24px;
-    }
-    
-    .choice-btn {
-      background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-      border: 2px solid #444;
-      color: #f5f5f5;
-      padding: 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: 600;
-      transition: all 0.24s cubic-bezier(0.34, 1.56, 0.64, 1);
-      font-family: 'Noto Sans TC', sans-serif;
-      text-align: left;
-      line-height: 1.6;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .choice-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-      transition: left 0.5s ease;
-    }
-    
-    .choice-btn:hover::before {
-      left: 100%;
-    }
-    
-    .choice-btn:hover {
-      background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
-      border-color: #666;
-      transform: translateY(-6px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.6);
-    }
-    
-    .choice-btn:active {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    }
-    
-    .choice-label {
-      display: block;
-      font-size: 0.85rem;
-      opacity: 0.7;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    
-    .choice-text {
-      display: block;
-      font-size: 1rem;
-    }
+        .btn-control:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #888;
+        }
 
-    /* ── Ending Scene ── */
-    .ending-scene {
-      text-align: center;
-    }
-    
-    .ending-image {
-      width: 100%;
-      height: 400px;
-      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
-      border-radius: 8px;
-      margin-bottom: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
-      animation: endingPulse 2s ease-in-out infinite;
-    }
-    
-    @keyframes endingPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-    
-    .ending-message {
-      font-size: 1.4rem;
-      font-weight: 700;
-      line-height: 1.8;
-      margin-bottom: 32px;
-      color: #f5f5f5;
-      animation: fadeIn 1s ease-out;
-    }
-    
-    .action-btn {
-      background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-      border: 2px solid #666;
-      color: #f5f5f5;
-      padding: 16px 32px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1.05rem;
-      font-weight: 600;
-      transition: all 0.24s cubic-bezier(0.34, 1.56, 0.64, 1);
-      font-family: 'Noto Sans TC', sans-serif;
-      margin: 12px;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .action-btn::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(255,255,255,0.1);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-    
-    .action-btn:hover::before {
-      width: 300px;
-      height: 300px;
-    }
-    
-    .action-btn:hover {
-      background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
-      border-color: #888;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-    }
+        .progress-container {
+            margin-bottom: 25px;
+        }
 
-    /* ── Progress Bar ── */
-    .progress-bar {
-      height: 3px;
-      background: #333;
-      margin-bottom: 32px;
-      border-radius: 2px;
-      overflow: hidden;
-      position: relative;
-    }
-    
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #666, #999, #666);
-      transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      box-shadow: 0 0 10px rgba(153,153,153,0.5);
-    }
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            overflow: hidden;
+        }
 
-    /* ── Responsive ── */
-    @media (max-width: 768px) {
-      .game-container { padding: 16px; }
-      .game-header h1 { font-size: 1.8rem; }
-      .scene-content { padding: 24px; }
-      .scene-title { font-size: 1.4rem; }
-      .scene-description { font-size: 0.95rem; }
-      .scene-image { height: 200px; font-size: 3rem; }
-      .choices-container { grid-template-columns: 1fr; }
-      .ending-image { height: 250px; font-size: 3rem; }
-    }
-  </style>
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #888, #ccc);
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(200, 200, 200, 0.5);
+        }
+
+        .scene {
+            display: none;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .scene.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .scene-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #e8e8e8;
+            animation: titleSlide 0.6s ease-out;
+        }
+
+        @keyframes titleSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .scene-description {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #d0d0d0;
+            margin-bottom: 25px;
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+
+        .emoji-large {
+            font-size: 60px;
+            margin: 20px 0;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .choices {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .choice-btn {
+            background: linear-gradient(135deg, rgba(100, 100, 100, 0.3), rgba(80, 80, 80, 0.3));
+            border: 2px solid #555;
+            color: #f5f5f5;
+            padding: 18px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            text-align: left;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .choice-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .choice-btn:hover {
+            background: linear-gradient(135deg, rgba(120, 120, 120, 0.4), rgba(100, 100, 100, 0.4));
+            border-color: #888;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .choice-btn:hover::before {
+            left: 100%;
+        }
+
+        .choice-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #b0b0b0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .choice-text {
+            display: block;
+            color: #f5f5f5;
+        }
+
+        .stance-meter {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(50, 50, 50, 0.5);
+            border-left: 4px solid #888;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #c0c0c0;
+            animation: fadeIn 0.8s ease-out 0.3s both;
+        }
+
+        .stance-label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #e0e0e0;
+        }
+
+        .ending-container {
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .ending-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 20px 0;
+            color: #e8e8e8;
+        }
+
+        .ending-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #d0d0d0;
+            margin: 20px 0;
+        }
+
+        .stance-distribution {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .stance-item {
+            background: rgba(80, 80, 80, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #888;
+        }
+
+        .stance-item-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #b0b0b0;
+            margin-bottom: 8px;
+        }
+
+        .stance-item-bar {
+            width: 100%;
+            height: 8px;
+            background: #333;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .stance-item-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #888, #ccc);
+            transition: width 0.8s ease-out;
+        }
+
+        .btn-restart {
+            background: linear-gradient(135deg, #555, #777);
+            border: none;
+            color: #f5f5f5;
+            padding: 12px 30px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-restart:hover {
+            background: linear-gradient(135deg, #666, #888);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .mute-btn {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .mute-btn:hover {
+            color: #ccc;
+        }
+
+        .mute-btn.muted {
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .game-container {
+                padding: 25px;
+            }
+
+            .scene-title {
+                font-size: 20px;
+            }
+
+            .stance-distribution {
+                grid-template-columns: 1fr;
+            }
+
+            .emoji-large {
+                font-size: 40px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="game-container">
+        <div class="header">
+            <div class="title">最後的機會</div>
+            <div class="controls">
+                <button class="mute-btn" id="muteBtn" title="靜音">🔊</button>
+                <button class="btn-control" onclick="history.back()">← 返回</button>
+            </div>
+        </div>
 
-<div class="game-container">
-  <div class="game-header">
-    <button class="return-btn" onclick="history.back()"><i class="fas fa-arrow-left"></i> 返回</button>
-    <h1>最後的機會</h1>
-    <p>一個關於選擇、責任與改變的故事</p>
-  </div>
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
 
-  <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
-  </div>
+        <!-- 開場 -->
+        <div class="scene active" id="scene-start">
+            <div class="scene-title">深夜街角</div>
+            <div class="emoji-large">🌙</div>
+            <div class="scene-description">
+                夜幕低垂，街角的路燈投下昏黃的光影。一隻瘦弱的小狗蜷縮在冷硬的地上，牠的眼神中透著無助與渴望。牠看著你，彷彿在問：「你會幫我嗎？」
+            </div>
+            <div class="choices">
+                <button class="choice-btn" onclick="makeChoice('start', 'compassion')">
+                    <span class="choice-label">💝 感性救援</span>
+                    <span class="choice-text">靠近牠，給予食物與溫暖，希望能緩解牠當下的痛苦。</span>
+                </button>
+                <button class="choice-btn" onclick="makeChoice('start', 'rational')">
+                    <span class="choice-label">📞 理性通報</span>
+                    <span class="choice-text">聯繫相關單位，希望由專業體系介入（可能導向收容或 TNVR）。</span>
+                </button>
+                <button class="choice-btn" onclick="makeChoice('start', 'cautious')">
+                    <span class="choice-label">⚠️ 謹慎觀察</span>
+                    <span class="choice-text">擔心造成環境問題或被咬，選擇保持距離與觀察。</span>
+                </button>
+                <button class="choice-btn" onclick="makeChoice('start', 'committed')">
+                    <span class="choice-label">🤝 長期承諾</span>
+                    <span class="choice-text">不只是餵食，而是開始尋找認養者或中途家庭。</span>
+                </button>
+            </div>
+            <div class="stance-meter">
+                <div class="stance-label">你的立場正在形成...</div>
+                <div style="font-size: 13px; color: #999;">每一個選擇都反映了你對這個議題的價值觀。</div>
+            </div>
+        </div>
 
-  <!-- Scene 1: Opening -->
-  <div class="scene active" id="scene1">
-    <div class="scene-content">
-      <div class="scene-image">🌙</div>
-      <div class="scene-title" id="title1"></div>
-      <div class="scene-description" id="desc1"></div>
-      <div class="choices-container">
-        <button class="choice-btn" onclick="makeChoice('scene2a', 0.4)">
-          <span class="choice-label">選擇 A</span>
-          <span class="choice-text">靠近牠、餵食牠</span>
-        </button>
-        <button class="choice-btn" onclick="makeChoice('scene2b', 0.4)">
-          <span class="choice-label">選擇 B</span>
-          <span class="choice-text">沒有理牠，繼續走</span>
-        </button>
-      </div>
+        <!-- 場景二：群聚 -->
+        <div class="scene" id="scene-gathering">
+            <div class="scene-title">街頭的群聚</div>
+            <div class="emoji-large">🐕‍🦺🐕</div>
+            <div class="scene-description">
+                隔天早晨，你發現街頭有更多流浪犬聚集在垃圾堆附近。牠們相互依靠，但也因為資源競爭而不時發生衝突。附近的居民開始抱怨，商家也表示擔憂。
+            </div>
+            <div class="choices">
+                <button class="choice-btn" onclick="makeChoice('gathering', 'expand-feeding')">
+                    <span class="choice-label">🥘 擴大餵食</span>
+                    <span class="choice-text">加入更多人一起餵食，希望能減少牠們的飢餓與衝突。</span>
+                </button>
+                <button class="choice-btn" onclick="makeChoice('gathering', 'tnvr')">
+                    <span class="choice-label">🏥 推動 TNVR</span>
+                    <span class="choice-text">與動保團體合作，進行捕捉、結紮、疫苗、回放計畫。</span>
+                </button>
+                <button class="choice-btn" onclick="makeChoice('gathering', 'removal')">
+                    <span class="choice-label">🚚 移除與收容</span>
+                    <span class="choice-text">通報政府進行捕捉與收容，以解決公共安全問題。</span>
+                </button>
+                <button class="choice-btn" onclick="makeChoice('gathering', 'education')">
+                    <span class="choice-label">📚 社區教育</span>
+                    <span class="choice-text">組織社區說明會，討論如何平衡動物福利與公共利益。</span>
+                </button>
+            </div>
+            <div class="stance-meter">
+                <div class="stance-label">你的選擇越來越清晰...</div>
+            </div>
+        </div>
+
+        <!-- 結局 -->
+        <div class="scene" id="scene-ending">
+            <div class="ending-container">
+                <div class="ending-title" id="endingTitle">你的故事</div>
+                <div class="emoji-large" id="endingEmoji">🌟</div>
+                <div class="ending-text" id="endingText"></div>
+
+                <div style="margin-top: 30px; padding: 20px; background: rgba(80, 80, 80, 0.3); border-radius: 8px;">
+                    <div style="font-weight: 600; margin-bottom: 15px; color: #e0e0e0;">你的立場分布</div>
+                    <div class="stance-distribution">
+                        <div class="stance-item">
+                            <div class="stance-item-label">💝 人道關懷</div>
+                            <div class="stance-item-bar">
+                                <div class="stance-item-fill" id="fill-compassion" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="stance-item">
+                            <div class="stance-item-label">🛡️ 公共安全</div>
+                            <div class="stance-item-bar">
+                                <div class="stance-item-fill" id="fill-safety" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="stance-item">
+                            <div class="stance-item-label">🌿 生態保育</div>
+                            <div class="stance-item-bar">
+                                <div class="stance-item-fill" id="fill-ecology" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="stance-item">
+                            <div class="stance-item-label">⚙️ 系統性解決</div>
+                            <div class="stance-item-bar">
+                                <div class="stance-item-fill" id="fill-system" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-restart" onclick="location.reload()">重新開始遊戲</button>
+                <button class="btn-restart" style="background: linear-gradient(135deg, #666, #888); margin-left: 10px;" onclick="history.back()">返回主頁</button>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- Scene 2A: Feed the dog -->
-  <div class="scene" id="scene2a">
-    <div class="scene-content">
-      <div class="scene-image">🐕</div>
-      <div class="scene-title" id="title2a"></div>
-      <div class="scene-description" id="desc2a"></div>
-      <div class="choices-container">
-        <button class="choice-btn" onclick="makeChoice('scene3a', 0.6)">
-          <span class="choice-label">選擇 A</span>
-          <span class="choice-text">加入餵食行列</span>
-        </button>
-        <button class="choice-btn" onclick="makeChoice('scene3b', 0.6)">
-          <span class="choice-label">選擇 B</span>
-          <span class="choice-text">尋求安置或認養資訊</span>
-        </button>
-      </div>
-    </div>
-  </div>
+    <script>
+        const stances = {
+            compassion: 0,
+            safety: 0,
+            ecology: 0,
+            system: 0
+        };
 
-  <!-- Scene 2B: Ignore the dog -->
-  <div class="scene" id="scene2b">
-    <div class="scene-content">
-      <div class="scene-image">🌃</div>
-      <div class="scene-title" id="title2b"></div>
-      <div class="scene-description" id="desc2b"></div>
-      <div class="choices-container">
-        <button class="choice-btn" onclick="makeChoice('scene3a', 0.6)">
-          <span class="choice-label">選擇 A</span>
-          <span class="choice-text">加入餵食行列</span>
-        </button>
-        <button class="choice-btn" onclick="makeChoice('scene3b', 0.6)">
-          <span class="choice-label">選擇 B</span>
-          <span class="choice-text">尋求安置或認養資訊</span>
-        </button>
-      </div>
-    </div>
-  </div>
+        const endings = {
+            compassion_heavy: {
+                title: '短暫的溫暖，長期的困境',
+                emoji: '💔',
+                text: '你的持續餵食確實給了這些狗狗短暫的溫暖，但數量卻在不斷增加。最終，社區的不滿與衝突也隨之升級。你開始意識到，單純的感情無法解決結構性的問題。'
+            },
+            safety_heavy: {
+                title: '冰冷的秩序，被遺忘的生命',
+                emoji: '❄️',
+                text: '通過移除與收容，街道確實變得「乾淨」了。但那些被帶走的生命去了哪裡？你開始反思，是否有更人道的方式來平衡公共安全與動物福利。'
+            },
+            system_heavy: {
+                title: '系統性的轉機',
+                emoji: '🌱',
+                text: '經過多方的努力與溝通，社區逐漸建立起一套平衡的管理機制。TNVR、源頭管控與公眾教育並行，流浪犬數量開始穩定下降，衝突也隨之減少。改變是緩慢的，但方向是正確的。'
+            },
+            balanced: {
+                title: '複雜中的平衡',
+                emoji: '⚖️',
+                text: '你的選擇反映了對這個議題的深刻理解。沒有完美的答案，但透過不同立場的對話與協力，我們可以找到更好的解決方案。你已經成為這個改變的一部分。'
+            }
+        };
 
-  <!-- Scene 3A: Join feeding -->
-  <div class="scene" id="scene3a">
-    <div class="scene-content">
-      <div class="scene-image">🍖</div>
-      <div class="scene-title" id="title3a"></div>
-      <div class="scene-description" id="desc3a"></div>
-      <div class="choices-container">
-        <button class="choice-btn" onclick="makeChoice('ending1', 0.8)">
-          <span class="choice-label">了解更多</span>
-          <span class="choice-text">看看我們能做什麼</span>
-        </button>
-      </div>
-    </div>
-  </div>
+        function makeChoice(scene, choice) {
+            // 更新立場計數
+            const choiceStances = {
+                compassion: { compassion: 2, system: 1 },
+                rational: { system: 2, safety: 1 },
+                cautious: { safety: 2, ecology: 1 },
+                committed: { compassion: 1, system: 2 },
+                'expand-feeding': { compassion: 2 },
+                'tnvr': { system: 2, ecology: 1 },
+                'removal': { safety: 2 },
+                'education': { system: 2, compassion: 1 }
+            };
 
-  <!-- Scene 3B: Seek help -->
-  <div class="scene" id="scene3b">
-    <div class="scene-content">
-      <div class="scene-image">📞</div>
-      <div class="scene-title" id="title3b"></div>
-      <div class="scene-description" id="desc3b"></div>
-      <div class="choices-container">
-        <button class="choice-btn" onclick="makeChoice('ending2', 0.8)">
-          <span class="choice-label">了解更多</span>
-          <span class="choice-text">看看我們能做什麼</span>
-        </button>
-      </div>
-    </div>
-  </div>
+            if (choiceStances[choice]) {
+                Object.entries(choiceStances[choice]).forEach(([stance, points]) => {
+                    stances[stance] += points;
+                });
+            }
 
-  <!-- Ending 1: Reflection -->
-  <div class="scene" id="ending1">
-    <div class="scene-content ending-scene">
-      <div class="ending-image">💔</div>
-      <div class="ending-message" id="endMsg1"></div>
-      <button class="action-btn" onclick="window.location.href='index.html'">
-        <i class="fas fa-home"></i> 回到主頁
-      </button>
-      <button class="action-btn" onclick="window.location.href='flow_paths.html'">
-        <i class="fas fa-code-branch"></i> 了解分流機制
-      </button>
-      <button class="action-btn" onclick="window.location.href='comparison.html'">
-        <i class="fas fa-globe"></i> 國際政策對比
-      </button>
-    </div>
-  </div>
+            // 更新進度條
+            updateProgress();
 
-  <!-- Ending 2: Hope -->
-  <div class="scene" id="ending2">
-    <div class="scene-content ending-scene">
-      <div class="ending-image">🌟</div>
-      <div class="ending-message" id="endMsg2"></div>
-      <button class="action-btn" onclick="window.location.href='index.html'">
-        <i class="fas fa-home"></i> 回到主頁
-      </button>
-      <button class="action-btn" onclick="window.location.href='flow_paths.html'">
-        <i class="fas fa-code-branch"></i> 了解分流機制
-      </button>
-      <button class="action-btn" onclick="window.location.href='comparison.html'">
-        <i class="fas fa-globe"></i> 國際政策對比
-      </button>
-    </div>
-  </div>
-</div>
-
-<script>
-  // 遊戲內容
-  const gameContent = {
-    title1: '夜晚的街角',
-    desc1: '開場音效：夜晚街道聲。遠處傳來一隻小狗的叫聲。\n\n一修長的身影在街角出現。一隻小狗蜷縮在路邊，瑟瑟發抖。你看起來有點點餓，你會怎麼做？',
-    
-    title2a: '短暫的溫暖',
-    desc2a: '畫面：狗狗小小的，拼命吃著你給的食物。\n\n你看著牠吃完食物，眼神中充滿感激。但天色漸晚，主角已回家。隔天早晨，你又在同一條路上看到牠。牠還在那裡，靜靜地等著。\n\n旁白：「牠吃飽了，但仍然需要對明天的盼望與家。」',
-    
-    title2b: '隔天早晨',
-    desc2b: '畫面：狗狗依然在那個角落，但看起來更加虛弱。\n\n街頭有很多隻流浪狗聚集在垃圾堆旁，但狗狗依舊孤獨地蜷縮著。\n\n旁白：「你沒有理牠，但牠仍在那裡，靜靜地等著。」',
-    
-    title3a: '治標不治本',
-    desc3a: '畫面：狗狗圍在垃圾堆旁。\n\n你加入了餵食行列。每天都有人來餵牠們，但牠們仍然沒有家。\n\n旁白：「餵食可能帶來短暫的溫暖，但卻決不了根本問題。」\n\n字幕：「我們錯過的每一次，也可能是牠最後的機會。」',
-    
-    title3b: '真正的改變',
-    desc3b: '畫面：打電話給中途之家、狗狗被送去安置。\n\n你打電話給中途之家，狗狗被帶去安全的地方。\n\n旁白：「真正的改變，是找到能給牠家的方式。」\n\n字幕：「我們錯過的每一次，也可能是牠最後的機會。」',
-    
-    endMsg1: '我們錯過的每一次，\n也可能是牠最後的機會。\n\n但現在，我們還有機會改變。',
-    
-    endMsg2: '你的選擇改變了牠的人生。\n\n每一個行動，都能帶來希望。'
-  };
-
-  // 打字機效果
-  function typeWriter(element, text, speed = 50) {
-    return new Promise((resolve) => {
-      element.textContent = '';
-      let index = 0;
-      
-      function type() {
-        if (index < text.length) {
-          element.textContent += text.charAt(index);
-          index++;
-          setTimeout(type, speed);
-        } else {
-          resolve();
+            // 場景轉換
+            if (scene === 'start') {
+                document.getElementById('scene-start').classList.remove('active');
+                document.getElementById('scene-gathering').classList.add('active');
+            } else if (scene === 'gathering') {
+                document.getElementById('scene-gathering').classList.remove('active');
+                showEnding();
+            }
         }
-      }
-      
-      type();
-    });
-  }
 
-  // 場景轉換
-  async function goToScene(sceneId, progress) {
-    // 隱藏所有場景
-    document.querySelectorAll('.scene').forEach(scene => {
-      scene.classList.remove('active');
-    });
-    
-    // 顯示目標場景
-    const targetScene = document.getElementById(sceneId);
-    targetScene.classList.add('active');
-    
-    // 更新進度條
-    const progressFill = document.getElementById('progressFill');
-    progressFill.style.width = (progress * 100) + '%';
-    
-    // 打字機效果
-    const titleId = sceneId.replace('scene', 'title').replace('ending', 'endMsg');
-    const descId = sceneId.replace('scene', 'desc').replace('ending', 'endMsg');
-    
-    if (gameContent[titleId]) {
-      const titleEl = document.getElementById(titleId);
-      await typeWriter(titleEl, gameContent[titleId], 40);
-    }
-    
-    if (gameContent[descId]) {
-      const descEl = document.getElementById(descId);
-      await typeWriter(descEl, gameContent[descId], 25);
-    }
-    
-    // 滾動到頂部
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+        function updateProgress() {
+            const totalScenes = 2;
+            const currentScene = document.querySelector('.scene.active').id;
+            let progress = 50;
+            if (currentScene === 'scene-gathering') progress = 75;
+            if (currentScene === 'scene-ending') progress = 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
 
-  // 做出選擇
-  function makeChoice(sceneId, progress) {
-    // 添加點擊反饋
-    document.body.style.animation = 'none';
-    setTimeout(() => {
-      document.body.style.animation = 'breathe 8s ease-in-out infinite';
-    }, 10);
-    
-    goToScene(sceneId, progress);
-  }
+        function showEnding() {
+            document.getElementById('scene-gathering').classList.remove('active');
+            document.getElementById('scene-ending').classList.add('active');
 
-  // 初始化
-  window.addEventListener('load', () => {
-    goToScene('scene1', 0.2);
-  });
-</script>
+            // 計算結局
+            const total = Object.values(stances).reduce((a, b) => a + b, 0);
+            const compassionPercent = (stances.compassion / total) * 100;
+            const safetyPercent = (stances.safety / total) * 100;
+            const ecologyPercent = (stances.ecology / total) * 100;
+            const systemPercent = (stances.system / total) * 100;
 
+            // 顯示立場分布
+            document.getElementById('fill-compassion').style.width = compassionPercent + '%';
+            document.getElementById('fill-safety').style.width = safetyPercent + '%';
+            document.getElementById('fill-ecology').style.width = ecologyPercent + '%';
+            document.getElementById('fill-system').style.width = systemPercent + '%';
+
+            // 決定結局
+            let ending;
+            if (compassionPercent > 40) {
+                ending = endings.compassion_heavy;
+            } else if (safetyPercent > 40) {
+                ending = endings.safety_heavy;
+            } else if (systemPercent > 40) {
+                ending = endings.system_heavy;
+            } else {
+                ending = endings.balanced;
+            }
+
+            document.getElementById('endingTitle').textContent = ending.title;
+            document.getElementById('endingEmoji').textContent = ending.emoji;
+            document.getElementById('endingText').textContent = ending.text;
+
+            updateProgress();
+        }
+
+        // 靜音按鈕
+        document.getElementById('muteBtn').addEventListener('click', function() {
+            this.classList.toggle('muted');
+            this.textContent = this.classList.contains('muted') ? '🔇' : '🔊';
+        });
+
+        // 初始化進度條
+        updateProgress();
+    </script>
 </body>
 </html>
