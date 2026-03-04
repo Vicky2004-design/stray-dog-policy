@@ -157,11 +157,11 @@
         }
 
         .scene-description {
-            font-size: 18px;
+            font-size: 16px;
             line-height: 1.8;
             color: rgba(255,255,255,0.8);
             margin-bottom: 35px;
-            min-height: 100px;
+            min-height: 80px;
         }
 
         .choices {
@@ -177,7 +177,7 @@
             padding: 20px 25px;
             border-radius: 10px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
             text-align: left;
             transition: all 0.3s ease;
             display: flex;
@@ -191,17 +191,32 @@
         }
 
         .choice-label {
-            font-size: 12px;
-            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
             margin-bottom: 5px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .choice-description {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 8px;
+        }
+
+        .choice-impact {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 8px;
+            margin-top: 8px;
         }
 
         /* 結局專用樣式 */
         .ending-content { text-align: center; }
         .ending-title { font-size: 32px; margin-bottom: 20px; color: #fff; }
-        .ending-text { font-size: 18px; line-height: 1.8; margin-bottom: 30px; }
+        .ending-text { font-size: 16px; line-height: 1.8; margin-bottom: 30px; color: rgba(255,255,255,0.8); }
         
         .stance-grid {
             display: grid;
@@ -209,6 +224,28 @@
             gap: 20px;
             margin: 30px 0;
             text-align: left;
+        }
+
+        .stance-item {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stance-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stance-definition {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 10px;
+            line-height: 1.6;
         }
 
         .stance-bar-bg {
@@ -281,8 +318,8 @@
 
     <div id="start-overlay">
         <h1 style="margin-bottom: 30px; letter-spacing: 5px;">最後的機會</h1>
-        <p style="margin-bottom: 30px; color: rgba(255,255,255,0.6); font-size: 18px;">探索遊蕩犬議題的複雜性</p>
-        <button class="btn-action" onclick="startGame()">開始探索</button>
+        <p style="margin-bottom: 30px; color: rgba(255,255,255,0.6); font-size: 18px;">遊蕩犬管理政策模擬器</p>
+        <button class="btn-action" onclick="startGame()">開始模擬</button>
         <p style="margin-top: 20px; color: rgba(255,255,255,0.4); font-size: 14px;">建議開啟聲音以獲得最佳體驗</p>
     </div>
 
@@ -310,66 +347,76 @@
                 <div class="progress-fill" id="progressFill"></div>
             </div>
 
-            <!-- 場景零：初始印象 -->
+            <!-- 場景零：初始立場 -->
             <div class="scene active" id="scene-impression">
-                <div class="scene-title">心中的印象</div>
+                <div class="scene-title">初始立場評估</div>
                 <div class="scene-description" id="desc-impression"></div>
                 <div class="choices">
                     <button class="choice-btn" onclick="makeChoice('impression', 'victim')">
-                        <span class="choice-label">人道關懷</span>
-                        <span>無助的受害者：牠們是被人類社會遺忘的弱勢群體。</span>
+                        <span class="choice-label">人道關懷導向</span>
+                        <span class="choice-description">強調動物福利與個體生命價值的保護。</span>
+                        <span class="choice-impact">影響：高投入成本，低即時風險，長期管理複雜度高。</span>
                     </button>
                     <button class="choice-btn" onclick="makeChoice('impression', 'threat')">
-                        <span class="choice-label">公共安全</span>
-                        <span>社區的安全隱患：牠們的存在可能對居民生活造成威脅。</span>
+                        <span class="choice-label">安全優先導向</span>
+                        <span class="choice-description">優先考量公共衛生與居民安全的風險管理。</span>
+                        <span class="choice-impact">影響：快速見效，社會接受度高，長期可持續性需評估。</span>
                     </button>
                     <button class="choice-btn" onclick="makeChoice('impression', 'ecology')">
-                        <span class="choice-label">生態平衡</span>
-                        <span>生態系統的破壞者：牠們可能對本土野生動物造成衝擊。</span>
+                        <span class="choice-label">生態平衡導向</span>
+                        <span class="choice-description">關注遊蕩犬對本土生態系統的影響與平衡。</span>
+                        <span class="choice-impact">影響：需要科學監測，跨域合作複雜，效果評估周期長。</span>
                     </button>
                     <button class="choice-btn" onclick="makeChoice('impression', 'system')">
-                        <span class="choice-label">系統思維</span>
-                        <span>被忽視的生命：這是人類管理體系失靈下的悲劇產物。</span>
+                        <span class="choice-label">系統思維導向</span>
+                        <span class="choice-description">著重於問題根源與制度層面的長期解決方案。</span>
+                        <span class="choice-impact">影響：需要多方協力，見效時間長，但可能實現根本改善。</span>
                     </button>
                 </div>
             </div>
 
             <!-- 場景一 -->
             <div class="scene" id="scene-start">
-                <div class="scene-title">深夜街角</div>
+                <div class="scene-title">個體干預決策</div>
                 <div class="scene-description" id="desc-start"></div>
                 <div class="choices">
                     <button class="choice-btn" onclick="makeChoice('start', 'compassion')">
-                        <span class="choice-label">人道餵食</span>
-                        <span>給予食物與水，不忍看牠挨餓。</span>
+                        <span class="choice-label">個體生存支持</span>
+                        <span class="choice-description">提供食物與飲用水，直接滿足個體生理需求。</span>
+                        <span class="choice-impact">影響：可能導致族群聚集，增加疾病傳播風險，但改善個體福利。</span>
                     </button>
                     <button class="choice-btn" onclick="makeChoice('start', 'rational')">
-                        <span class="choice-label">理性通報</span>
-                        <span>聯繫相關單位，尋求專業體系介入。</span>
+                        <span class="choice-label">專業機構通報</span>
+                        <span class="choice-description">聯繫動物保護或公共衛生相關單位，啟動正式程序。</span>
+                        <span class="choice-impact">影響：符合法律程序，但處置結果取決於機構政策與資源。</span>
                     </button>
                     <button class="choice-btn" onclick="makeChoice('start', 'committed')">
-                        <span class="choice-label">長期承諾</span>
-                        <span>開始為牠尋找認養者或中途家庭。</span>
+                        <span class="choice-label">長期照護承諾</span>
+                        <span class="choice-description">承擔個體的持續照護責任，尋求認養或中途安置。</span>
+                        <span class="choice-impact">影響：高個人投入成本，但可能實現個體生活改善。</span>
                     </button>
                 </div>
             </div>
 
             <!-- 場景二 -->
             <div class="scene" id="scene-gathering">
-                <div class="scene-title">街頭的群聚</div>
+                <div class="scene-title">群體管理決策</div>
                 <div class="scene-description" id="desc-gathering"></div>
                 <div class="choices">
                     <button class="choice-btn" onclick="makeChoice('gathering', 'tnvr')">
-                        <span class="choice-label">推動 TNVR</span>
-                        <span>捕捉、結紮、疫苗、回放，控制數量。</span>
+                        <span class="choice-label">TNVR 族群管理</span>
+                        <span class="choice-description">捕捉、結紮、疫苗接種、回放，控制族群增長。</span>
+                        <span class="choice-impact">影響：國際認可方案，需 80% 以上結紮率才能有效，需長期投入。</span>
                     </button>
                     <button class="choice-btn" onclick="makeChoice('gathering', 'removal')">
                         <span class="choice-label">移除與收容</span>
-                        <span>通報政府捕捉，優先確保公共安全。</span>
+                        <span class="choice-description">通報政府進行捕捉與收容，優先確保公共安全。</span>
+                        <span class="choice-impact">影響：快速降低街頭族群數量，但涉及收容設施與資源問題。</span>
                     </button>
                     <button class="choice-btn" onclick="makeChoice('gathering', 'education')">
-                        <span class="choice-label">社區教育</span>
-                        <span>組織說明會，尋求人與犬共存的共識。</span>
+                        <span class="choice-label">社區協作方案</span>
+                        <span class="choice-description">組織說明會與教育活動，建立人與犬共存的社區共識。</span>
+                        <span class="choice-impact">影響：長期改變社會認知，但見效時間長，需持續投入。</span>
                     </button>
                 </div>
             </div>
@@ -381,25 +428,29 @@
                     <p class="ending-text" id="endingText"></p>
                     
                     <div class="stance-grid">
-                        <div>
-                            <span style="font-size: 14px; color: rgba(255,255,255,0.6);">人道關懷 (Compassion)</span>
+                        <div class="stance-item">
+                            <div class="stance-label">人道關懷</div>
+                            <div class="stance-definition">重視動物個體福利與生命尊嚴的保護。</div>
                             <div class="stance-bar-bg"><div id="bar-compassion" class="stance-bar-fill"></div></div>
                         </div>
-                        <div>
-                            <span style="font-size: 14px; color: rgba(255,255,255,0.6);">公共安全 (Safety)</span>
+                        <div class="stance-item">
+                            <div class="stance-label">公共安全</div>
+                            <div class="stance-definition">優先考量公眾衛生與居民安全的風險管理。</div>
                             <div class="stance-bar-bg"><div id="bar-safety" class="stance-bar-fill"></div></div>
                         </div>
-                        <div>
-                            <span style="font-size: 14px; color: rgba(255,255,255,0.6);">生態平衡 (Ecology)</span>
+                        <div class="stance-item">
+                            <div class="stance-label">生態平衡</div>
+                            <div class="stance-definition">關注遊蕩犬對本土生態系統的影響。</div>
                             <div class="stance-bar-bg"><div id="bar-ecology" class="stance-bar-fill"></div></div>
                         </div>
-                        <div>
-                            <span style="font-size: 14px; color: rgba(255,255,255,0.6);">系統思維 (System)</span>
+                        <div class="stance-item">
+                            <div class="stance-label">系統思維</div>
+                            <div class="stance-definition">著重於制度層面與根本性的解決方案。</div>
                             <div class="stance-bar-bg"><div id="bar-system" class="stance-bar-fill"></div></div>
                         </div>
                     </div>
 
-                    <button class="btn-action" onclick="location.reload()">重新開始</button>
+                    <button class="btn-action" onclick="location.reload()">重新模擬</button>
                     <button class="btn-action" style="background: transparent; border: 1px solid #fff; color: #fff; margin-left: 10px;" onclick="location.href='index.html'">返回研究首頁</button>
                 </div>
             </div>
@@ -409,34 +460,34 @@
     <script>
         const scenes = {
             impression: {
-                text: "在開始這段旅程之前，請先誠實地問自己：當你在街頭遇見一隻流浪犬時，你腦海中浮現的第一個念頭是什麼？這個初始的印象，往往決定了我們如何看待這個複雜的社會議題。",
+                text: "在開始政策模擬前，請評估您對遊蕩犬議題的初始立場。這個選擇將影響您在後續決策中的優先考量，幫助您理解不同價值體系如何導向不同的政策選擇。",
                 bg: "bg-impression"
             },
             start: {
-                text: "夜幕低垂，街角的路燈投下昏黃的光影。一隻瘦弱的小狗蜷縮在冷硬的地上，牠的眼神中透著無助與渴望。牠看著你，彷彿在問：「你會幫我嗎？」",
+                text: "在社區發現一隻遊蕩犬。牠的健康狀況需要立即評估，您的決策將影響個體福利與社區動態。不同的干預方式各有其利弊與後續影響。",
                 bg: "bg-start",
                 audio: "sfx-dog"
             },
             gathering: {
-                text: "隔天早晨，你發現街頭有更多流浪犬聚集在垃圾堆附近。牠們相互依靠，但也因為資源競爭而不時發生衝突。附近的居民開始抱怨，商家也表示擔憂。",
+                text: "社區內遊蕩犬數量增加，形成群體。多方利益相關者（居民、商家、動保組織、政府）對此有不同看法。您需要評估不同管理策略的可行性與影響。",
                 bg: "bg-gathering"
             }
         };
 
         const endings = {
             compassion: {
-                title: "短暫的溫暖，長期的困境",
-                text: "你的持續餵食確實給了這些狗狗短暫的溫暖，但數量卻在不斷增加。最終，社區的不滿與衝突也隨之升級。你開始意識到，單純的感情無法解決結構性的問題。",
+                title: "情境 A：高度人道投入型管理",
+                text: "在人道關懷導向下，社區投入大量資源於個體照護與福利改善。短期內，個體動物的生活條件獲得顯著改善。然而，持續的資源投入與族群管理的複雜性，使得長期可持續性面臨挑戰。此情境反映了單一價值導向在面對複雜社會問題時的局限。",
                 bg: "bg-ending-compassion"
             },
             system: {
-                title: "系統性的轉機",
-                text: "經過多方的努力與溝通，社區逐漸建立起一套平衡的管理機制。TNVR、源頭管控與公眾教育並行，流浪犬數量開始穩定下降。改變是緩慢的，但方向是正確的。",
+                title: "情境 B：多維度協力型管理",
+                text: "在系統思維導向下，社區建立起整合人道關懷、安全管理、生態保護與制度改革的綜合方案。雖然見效時間較長，但通過多方協力與制度創新，可能實現更具可持續性的解決方案。此情境強調了跨域合作與長期視野的重要性。",
                 bg: "bg-ending-system"
             },
             safety: {
-                title: "冰冷的秩序",
-                text: "通過移除與收容，街道確實變得「乾淨」了。但那些被帶走的生命去了哪裡？你開始反思，是否有更人道的方式來平衡公共安全與動物福利。",
+                title: "情境 C：安全優先型管理",
+                text: "在公共安全導向下，社區優先採取移除與風險管理措施。街頭遊蕩犬數量迅速下降，公眾安全風險得以控制。然而，此方案對動物福利與根本原因的關注相對有限，可能面臨道德與長期效果的質疑。",
                 bg: "bg-ending-system"
             }
         };
