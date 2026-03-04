@@ -1,0 +1,96 @@
+{
+  "project_info": {
+    "title": "最後的機會：互動式遊戲設計理念與視聽策略",
+    "created": 1772599216.8450487,
+    "last_updated": 1772599263.3125372,
+    "total_slides": 7
+  },
+  "slides": [
+    {
+      "id": "title_slide",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "core_philosophy",
+      "state": "edit_pending",
+      "pageNum": 2
+    },
+    {
+      "id": "visual_narrative",
+      "state": "edit_pending",
+      "pageNum": 3
+    },
+    {
+      "id": "audio_design",
+      "state": "edit_pending",
+      "pageNum": 4
+    },
+    {
+      "id": "stance_tracking",
+      "state": "edit_pending",
+      "pageNum": 5
+    },
+    {
+      "id": "conclusion_outlook",
+      "state": "edit_pending",
+      "pageNum": 6
+    },
+    {
+      "id": "references",
+      "state": "edit_pending",
+      "pageNum": 7
+    }
+  ],
+  "outline": [
+    {
+      "id": "title_slide",
+      "title": "最後的機會：互動式遊戲設計理念與視聽策略",
+      "summary": "介紹遊戲的核心設計理念、視覺與音效策略，以及其教育意義。",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    },
+    {
+      "id": "core_philosophy",
+      "title": "核心設計哲學：黑白灰美學與學術嚴謹性",
+      "summary": "闡述選擇黑白灰風格的原因，強調議題的嚴肅性與專業性。",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    },
+    {
+      "id": "visual_narrative",
+      "title": "視覺敘事策略：高對比攝影與 Ken Burns Effect",
+      "summary": "說明如何透過高對比黑白攝影和動態效果，將靜態圖像轉化為動態敘事。",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    },
+    {
+      "id": "audio_design",
+      "title": "多維度音效設計：沉浸式聽覺體驗",
+      "summary": "介紹環境音、情感觸發音效和互動回饋音效如何強化遊戲體驗。",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    },
+    {
+      "id": "stance_tracking",
+      "title": "立場追蹤與結局演算法：量化選擇，反映價值觀",
+      "summary": "解釋遊戲如何透過四維度立場系統追蹤玩家選擇，並決定多樣化結局。",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    },
+    {
+      "id": "conclusion_outlook",
+      "title": "總結與展望：互動式敘事遊戲的教育意義",
+      "summary": "總結遊戲的教育意義，並展望未來的發展方向。",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    },
+    {
+      "id": "references",
+      "title": "參考資料",
+      "summary": "列出投影片中引用的所有參考資料。",
+      "image_plan": "Use a suitable image if needed",
+      "slide_template_key": ""
+    }
+  ]
+}

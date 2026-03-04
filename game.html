@@ -281,11 +281,13 @@
 
     <div id="start-overlay">
         <h1 style="margin-bottom: 30px; letter-spacing: 5px;">最後的機會</h1>
+        <p style="margin-bottom: 30px; color: rgba(255,255,255,0.6); font-size: 18px;">探索遊蕩犬議題的複雜性</p>
         <button class="btn-action" onclick="startGame()">開始探索</button>
         <p style="margin-top: 20px; color: rgba(255,255,255,0.4); font-size: 14px;">建議開啟聲音以獲得最佳體驗</p>
     </div>
 
     <div class="bg-container">
+        <div id="bg-impression" class="bg-image" style="background-image: url('assets/scene_impression.jpg')"></div>
         <div id="bg-start" class="bg-image" style="background-image: url('assets/scene_start.jpg')"></div>
         <div id="bg-gathering" class="bg-image" style="background-image: url('assets/scene_gathering.jpg')"></div>
         <div id="bg-ending-compassion" class="bg-image" style="background-image: url('assets/ending_compassion.jpg')"></div>
@@ -298,8 +300,8 @@
             <div class="header">
                 <div class="title">最後的機會</div>
                 <div class="controls">
-                    <button class="mute-btn" id="muteBtn">🔊</button>
-                    <button class="mute-btn" onclick="location.reload()">🔄</button>
+                    <button class="mute-btn" id="muteBtn" title="音量控制">♪</button>
+                    <button class="mute-btn" onclick="location.reload()" title="重新開始">⟳</button>
                 </div>
             </div>
 
@@ -307,21 +309,45 @@
                 <div class="progress-fill" id="progressFill"></div>
             </div>
 
+            <!-- 場景零：初始印象 -->
+            <div class="scene active" id="scene-impression">
+                <div class="scene-title">心中的印象</div>
+                <div class="scene-description" id="desc-impression"></div>
+                <div class="choices">
+                    <button class="choice-btn" onclick="makeChoice('impression', 'victim')">
+                        <span class="choice-label">人道關懷</span>
+                        <span>無助的受害者：牠們是被人類社會遺忘的弱勢群體。</span>
+                    </button>
+                    <button class="choice-btn" onclick="makeChoice('impression', 'threat')">
+                        <span class="choice-label">公共安全</span>
+                        <span>社區的安全隱患：牠們的存在可能對居民生活造成威脅。</span>
+                    </button>
+                    <button class="choice-btn" onclick="makeChoice('impression', 'ecology')">
+                        <span class="choice-label">生態平衡</span>
+                        <span>生態系統的破壞者：牠們可能對本土野生動物造成衝擊。</span>
+                    </button>
+                    <button class="choice-btn" onclick="makeChoice('impression', 'system')">
+                        <span class="choice-label">系統思維</span>
+                        <span>被忽視的生命：這是人類管理體系失靈下的悲劇產物。</span>
+                    </button>
+                </div>
+            </div>
+
             <!-- 場景一 -->
-            <div class="scene active" id="scene-start">
+            <div class="scene" id="scene-start">
                 <div class="scene-title">深夜街角</div>
                 <div class="scene-description" id="desc-start"></div>
                 <div class="choices">
                     <button class="choice-btn" onclick="makeChoice('start', 'compassion')">
-                        <span class="choice-label">💝 人道餵食</span>
+                        <span class="choice-label">人道餵食</span>
                         <span>給予食物與水，不忍看牠挨餓。</span>
                     </button>
                     <button class="choice-btn" onclick="makeChoice('start', 'rational')">
-                        <span class="choice-label">📞 理性通報</span>
+                        <span class="choice-label">理性通報</span>
                         <span>聯繫相關單位，尋求專業體系介入。</span>
                     </button>
                     <button class="choice-btn" onclick="makeChoice('start', 'committed')">
-                        <span class="choice-label">🤝 長期承諾</span>
+                        <span class="choice-label">長期承諾</span>
                         <span>開始為牠尋找認養者或中途家庭。</span>
                     </button>
                 </div>
@@ -333,15 +359,15 @@
                 <div class="scene-description" id="desc-gathering"></div>
                 <div class="choices">
                     <button class="choice-btn" onclick="makeChoice('gathering', 'tnvr')">
-                        <span class="choice-label">🏥 推動 TNVR</span>
+                        <span class="choice-label">推動 TNVR</span>
                         <span>捕捉、結紮、疫苗、回放，控制數量。</span>
                     </button>
                     <button class="choice-btn" onclick="makeChoice('gathering', 'removal')">
-                        <span class="choice-label">🚚 移除與收容</span>
+                        <span class="choice-label">移除與收容</span>
                         <span>通報政府捕捉，優先確保公共安全。</span>
                     </button>
                     <button class="choice-btn" onclick="makeChoice('gathering', 'education')">
-                        <span class="choice-label">📚 社區教育</span>
+                        <span class="choice-label">社區教育</span>
                         <span>組織說明會，尋求人與犬共存的共識。</span>
                     </button>
                 </div>
@@ -355,19 +381,19 @@
                     
                     <div class="stance-grid">
                         <div>
-                            <span style="font-size: 14px; color: rgba(255,255,255,0.6);">人道關懷</span>
+                            <span style="font-size: 14px; color: rgba(255,255,255,0.6);">人道關懷 (Compassion)</span>
                             <div class="stance-bar-bg"><div id="bar-compassion" class="stance-bar-fill"></div></div>
                         </div>
                         <div>
-                            <span style="font-size: 14px; color: rgba(255,255,255,0.6);">公共安全</span>
+                            <span style="font-size: 14px; color: rgba(255,255,255,0.6);">公共安全 (Safety)</span>
                             <div class="stance-bar-bg"><div id="bar-safety" class="stance-bar-fill"></div></div>
                         </div>
                         <div>
-                            <span style="font-size: 14px; color: rgba(255,255,255,0.6);">生態平衡</span>
+                            <span style="font-size: 14px; color: rgba(255,255,255,0.6);">生態平衡 (Ecology)</span>
                             <div class="stance-bar-bg"><div id="bar-ecology" class="stance-bar-fill"></div></div>
                         </div>
                         <div>
-                            <span style="font-size: 14px; color: rgba(255,255,255,0.6);">系統思維</span>
+                            <span style="font-size: 14px; color: rgba(255,255,255,0.6);">系統思維 (System)</span>
                             <div class="stance-bar-bg"><div id="bar-system" class="stance-bar-fill"></div></div>
                         </div>
                     </div>
@@ -381,6 +407,10 @@
 
     <script>
         const scenes = {
+            impression: {
+                text: "在開始這段旅程之前，請先誠實地問自己：當你在街頭遇見一隻流浪犬時，你腦海中浮現的第一個念頭是什麼？這個初始的印象，往往決定了我們如何看待這個複雜的社會議題。",
+                bg: "bg-impression"
+            },
             start: {
                 text: "夜幕低垂，街角的路燈投下昏黃的光影。一隻瘦弱的小狗蜷縮在冷硬的地上，牠的眼神中透著無助與渴望。牠看著你，彷彿在問：「你會幫我嗎？」",
                 bg: "bg-start",
@@ -418,7 +448,7 @@
             setTimeout(() => {
                 document.getElementById('start-overlay').style.display = 'none';
                 playBGM();
-                changeScene('start');
+                changeScene('impression');
             }, 1000);
         }
 
@@ -472,24 +502,29 @@
             }
 
             // 更新進度
-            const progress = sceneId === 'start' ? 33 : 66;
-            document.getElementById('progressFill').style.width = `${progress}%`;
+            const progressMap = { 'impression': 25, 'start': 50, 'gathering': 75 };
+            document.getElementById('progressFill').style.width = `${progressMap[sceneId]}%`;
         }
 
         function makeChoice(currentScene, choice) {
             playSFX('sfx-click');
 
-            // 簡單立場邏輯
-            if (choice === 'compassion') stances.compassion += 3;
-            if (choice === 'rational') { stances.system += 2; stances.safety += 1; }
-            if (choice === 'committed') { stances.compassion += 1; stances.system += 2; }
-            if (choice === 'tnvr') { stances.system += 3; stances.ecology += 1; }
-            if (choice === 'removal') stances.safety += 3;
-            if (choice === 'education') { stances.system += 2; stances.compassion += 1; }
-
-            if (currentScene === 'start') {
+            // 立場邏輯
+            if (currentScene === 'impression') {
+                if (choice === 'victim') stances.compassion += 2;
+                if (choice === 'threat') stances.safety += 2;
+                if (choice === 'ecology') stances.ecology += 2;
+                if (choice === 'system') stances.system += 2;
+                setTimeout(() => changeScene('start'), 500);
+            } else if (currentScene === 'start') {
+                if (choice === 'compassion') stances.compassion += 3;
+                if (choice === 'rational') { stances.system += 2; stances.safety += 1; }
+                if (choice === 'committed') { stances.compassion += 1; stances.system += 2; }
                 setTimeout(() => changeScene('gathering'), 500);
-            } else {
+            } else if (currentScene === 'gathering') {
+                if (choice === 'tnvr') { stances.system += 3; stances.ecology += 1; }
+                if (choice === 'removal') stances.safety += 3;
+                if (choice === 'education') { stances.system += 2; stances.compassion += 1; }
                 setTimeout(() => showEnding(), 500);
             }
         }
@@ -517,12 +552,12 @@
             document.getElementById('endingTitle').textContent = ending.title;
             document.getElementById('endingText').textContent = ending.text;
 
-            // 顯示立場條
+            // 顯示立場條 (以最高可能分母 8 為基準)
             setTimeout(() => {
-                document.getElementById('bar-compassion').style.width = `${(stances.compassion / 6) * 100}%`;
-                document.getElementById('bar-safety').style.width = `${(stances.safety / 6) * 100}%`;
-                document.getElementById('bar-ecology').style.width = `${(stances.ecology / 6) * 100}%`;
-                document.getElementById('bar-system').style.width = `${(stances.system / 6) * 100}%`;
+                document.getElementById('bar-compassion').style.width = `${(stances.compassion / 8) * 100}%`;
+                document.getElementById('bar-safety').style.width = `${(stances.safety / 8) * 100}%`;
+                document.getElementById('bar-ecology').style.width = `${(stances.ecology / 8) * 100}%`;
+                document.getElementById('bar-system').style.width = `${(stances.system / 8) * 100}%`;
             }, 500);
 
             document.getElementById('progressFill').style.width = `100%`;
@@ -533,7 +568,7 @@
             isMuted = !isMuted;
             const bgm = document.getElementById('bgm');
             bgm.muted = isMuted;
-            this.textContent = isMuted ? '🔇' : '🔊';
+            this.textContent = isMuted ? '✕' : '♪';
         });
     </script>
 </body>
