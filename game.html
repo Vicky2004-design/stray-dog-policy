@@ -466,6 +466,68 @@
     </div>
 
     <script>
+        // Web Audio API 音效合成器
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let isMuted = false;
+
+        // 生成環境音效
+        function playAmbientSound() {
+            if (isMuted) return;
+            const now = audioContext.currentTime;
+            const duration = 3;
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            
+            osc.frequency.setValueAtTime(80, now);
+            osc.frequency.exponentialRampToValueAtTime(40, now + duration);
+            gain.gain.setValueAtTime(0.05, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + duration);
+            
+            osc.start(now);
+            osc.stop(now + duration);
+        }
+
+        // 生成點擊音效
+        function playClickSound() {
+            if (isMuted) return;
+            const now = audioContext.currentTime;
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            
+            osc.frequency.setValueAtTime(800, now);
+            osc.frequency.exponentialRampToValueAtTime(200, now + 0.1);
+            gain.gain.setValueAtTime(0.1, now);
+            gain.gain.exponentialRampToValueAtTime(0, now + 0.1);
+            
+            osc.start(now);
+            osc.stop(now + 0.1);
+        }
+
+        // 生成小狗叫聲
+        function playDogSound() {
+            if (isMuted) return;
+            const now = audioContext.currentTime;
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            
+            osc.frequency.setValueAtTime(600, now);
+            osc.frequency.exponentialRampToValueAtTime(400, now + 0.3);
+            gain.gain.setValueAtTime(0.08, now);
+            gain.gain.exponentialRampToValueAtTime(0, now + 0.3);
+            
+            osc.start(now);
+            osc.stop(now + 0.3);
+        }
+
         const stances = {
             compassion: 0,
             safety: 0,
@@ -575,9 +637,27 @@
 
         // 靜音按鈕
         document.getElementById('muteBtn').addEventListener('click', function() {
+            isMuted = !isMuted;
             this.classList.toggle('muted');
-            this.textContent = this.classList.contains('muted') ? '🔇' : '🔊';
+            this.textContent = isMuted ? '🔇' : '🔊';
         });
+
+        // 場景轉換時播放環境音
+        const originalMakeChoice = makeChoice;
+        window.makeChoice = function(scene, choice) {
+            playClickSound();
+            originalMakeChoice(scene, choice);
+            setTimeout(() => playAmbientSound(), 500);
+        };
+
+        // 初始化時播放環境音
+        window.addEventListener('click', function initAudio() {
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            playAmbientSound();
+            window.removeEventListener('click', initAudio);
+        }, { once: true });
 
         // 初始化進度條
         updateProgress();
