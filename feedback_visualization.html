@@ -192,28 +192,64 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             cursor: pointer;
             transition: all 0.3s ease;
+            flex-direction: column;
+            padding: 8px;
+            text-align: center;
+            line-height: 1.2;
+            overflow: hidden;
+            word-break: break-word;
+        }
+
+        .bubble-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            gap: 3px;
+        }
+
+        .bubble-rating {
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .bubble-text {
+            font-size: 0.6rem;
+            font-weight: 500;
+            word-wrap: break-word;
+            max-height: 100%;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
         }
 
         .bubble:hover {
             transform: scale(1.1);
             filter: brightness(1.2);
+            z-index: 100;
         }
 
         .bubble-tooltip {
             position: absolute;
-            bottom: 100%;
+            bottom: 110%;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             color: #f5f5f5;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            white-space: nowrap;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            max-width: 250px;
+            white-space: normal;
+            word-wrap: break-word;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.2s ease;
-            z-index: 10;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
         }
 
         .bubble:hover .bubble-tooltip {
@@ -351,19 +387,17 @@
     </div>
 
     <script>
-        // 顏色配置 - 與主網站搭配
         const colors = {
-            content: '#00ff88',    // 綠色
-            clarity: '#ffff00',    // 黃色
-            design: '#ff4444',     // 紅色
-            suggestion: '#00ccff'  // 青色
+            content: '#00ff88',
+            clarity: '#ffff00',
+            design: '#ff4444',
+            suggestion: '#00ccff'
         };
 
         let feedbackData = [];
         let selectedRating = 0;
         let selectedType = null;
 
-        // 初始化評分星星
         document.querySelectorAll('.star').forEach(star => {
             star.addEventListener('click', function() {
                 selectedRating = parseInt(this.dataset.value);
@@ -373,7 +407,6 @@
             });
         });
 
-        // 初始化回饋類型按鈕
         document.querySelectorAll('.type-btn').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -383,7 +416,6 @@
             });
         });
 
-        // 表單提交
         document.getElementById('feedbackForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -403,18 +435,15 @@
             createBubble(feedback);
             updateStats();
 
-            // 重置表單
             selectedRating = 0;
             selectedType = null;
             document.querySelectorAll('.star').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('feedbackText').value = '';
 
-            // 提交成功提示
             alert('感謝您的回饋！');
         });
 
-        // 建立圓圈泡泡
         function createBubble(feedback) {
             const container = document.getElementById('bubblesContainer');
             const bubble = document.createElement('div');
@@ -428,30 +457,46 @@
             bubble.style.background = color;
             bubble.style.left = Math.random() * (container.clientWidth - size) + 'px';
             bubble.style.top = Math.random() * (container.clientHeight - size) + 'px';
-
-            // 動畫延遲
             bubble.style.animationDelay = Math.random() * 2 + 's';
 
-            // 工具提示
+            const content = document.createElement('div');
+            content.className = 'bubble-content';
+            
+            const rating = document.createElement('div');
+            rating.className = 'bubble-rating';
+            rating.textContent = feedback.rating + '★';
+            content.appendChild(rating);
+
+            if (feedback.text) {
+                const text = document.createElement('div');
+                text.className = 'bubble-text';
+                text.textContent = feedback.text.substring(0, 15) + (feedback.text.length > 15 ? '...' : '');
+                content.appendChild(text);
+            }
+
+            bubble.appendChild(content);
+
             const tooltip = document.createElement('div');
             tooltip.className = 'bubble-tooltip';
-            tooltip.textContent = `${feedback.rating}★ - ${feedback.type}`;
+            let tooltipText = '評分: ' + feedback.rating + '★ | 類型: ' + feedback.type;
+            if (feedback.text) {
+                tooltipText += '\n\n"' + feedback.text + '"';
+            }
+            tooltip.textContent = tooltipText;
             bubble.appendChild(tooltip);
 
-            // 點擊顯示詳細信息
             bubble.addEventListener('click', function() {
                 if (feedback.text) {
-                    alert(`評分: ${feedback.rating}★\n類型: ${feedback.type}\n\n回饋: ${feedback.text}`);
+                    alert('評分: ' + feedback.rating + '★\n類型: ' + feedback.type + '\n\n回饋: ' + feedback.text);
+                } else {
+                    alert('評分: ' + feedback.rating + '★\n類型: ' + feedback.type);
                 }
             });
 
             container.appendChild(bubble);
-
-            // 動畫移動效果
             animateBubble(bubble, container);
         }
 
-        // 圓圈動畫
         function animateBubble(bubble, container) {
             let x = parseFloat(bubble.style.left);
             let y = parseFloat(bubble.style.top);
@@ -476,7 +521,6 @@
             animate();
         }
 
-        // 更新統計數據
         function updateStats() {
             document.getElementById('totalFeedback').textContent = feedbackData.length;
 
@@ -496,7 +540,6 @@
             }
         }
 
-        // 載入本地儲存的回饋
         function loadFeedback() {
             const saved = localStorage.getItem('feedbackData');
             if (saved) {
@@ -506,15 +549,11 @@
             }
         }
 
-        // 保存回饋到本地儲存
         function saveFeedback() {
             localStorage.setItem('feedbackData', JSON.stringify(feedbackData));
         }
 
-        // 監聽表單提交後保存
         document.getElementById('feedbackForm').addEventListener('submit', saveFeedback);
-
-        // 頁面載入時恢復回饋
         window.addEventListener('load', loadFeedback);
     </script>
 </body>
